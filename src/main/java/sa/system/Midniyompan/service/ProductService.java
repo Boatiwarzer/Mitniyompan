@@ -58,15 +58,6 @@ public class ProductService {
     }
 
 
-//    public List<Product> searchProductsByCategory(String categoryName) {
-//        Category category = categoryRepository.findByName(categoryName);
-//        return productRepository.findByCategory(category);
-//    }
-
-//    public List<Product> searchProductsByName(String name) {
-//        return productRepository.findByName(name);
-//
-//    }
     public List<Product> listAll(String keyword) {
         if (keyword != null) {
             return productRepository.search(keyword);

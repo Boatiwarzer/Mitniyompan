@@ -8,7 +8,7 @@
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container w-50 p-3">
+  <div class="container w-50 p-3">
   <h1 class="display-5">Add Product</h1>
   <form action="#" th:action="@{/main/add}" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
@@ -31,13 +31,15 @@
         </option>
       </select>
     </div>
+    <div>
+      <label for="imageFile">รูปภาพ:</label>
+      <input type="file" class="form-control" id="imageFile" name="file" accept="image/*" ><br><br>
+      <button id="submit-button" type="submit" class="btn btn-primary">Add Product</button>
+    </div>
 
-    <label for="imageFile">รูปภาพ:</label>
-    <input type="file" class="form-control" id="imageFile" name="file" accept="image/*" ><br><br>
-
-    <button id="submit-button" type="submit" class="btn btn-primary">Add Product</button>
-  </div>
 
 </form>
+</div>
+
 </body>
 </html>
