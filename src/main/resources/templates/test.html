@@ -1,0 +1,46 @@
+<!--6410450206 Puttipong Srina-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Midniyompan-shop Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+  <h1 class="display-6">Menu</h1>
+
+
+      <table th:each="category : ${categories}" class="table table-bordered table-striped table-hover">
+
+
+          <thead class="thead-dark">
+          <tr class="table-dark">
+              <td colspan="3"><span th:text="${category.name}"></span></td>
+          </tr>
+          </thead>
+
+
+          <tbody>
+          <tr th:each="product : ${category.product}">
+              <td th:text="${product.name}"></td>
+              <td style="text-align: right" th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}">
+              </td>
+              <td style="text-align: center">
+                  <a class="btn btn-primary"
+                     th:href="@{/main/{id}(id=${main.id})}">View</a>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+
+
+</div>
+</body>
+</html>
+

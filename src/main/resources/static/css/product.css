@@ -1,0 +1,19 @@
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+}
+
+.product-card {
+    flex-basis: 25%; /* แก้ให้มี 4 แถว */
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    box-sizing: border-box; /* ควบคุมขนาดของกล่อง */
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 200px;
+}

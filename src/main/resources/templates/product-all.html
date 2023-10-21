@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Midniyompan-shop Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/product.css}">
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<!--<form method="get" action="/main">-->
+<!--    <input type="text" name="search" placeholder="ค้นหาชื่อผลิตภัณฑ์">-->
+<!--    <button type="submit">ค้นหา</button>-->
+<!--</form>-->
+<form th:action="@{/}">
+    Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+    &nbsp;
+    <input type="submit" value="Search" />
+    &nbsp;
+    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+</form>
+<h1>รายการสินค้า</h1>
+<div class="product-container">
+    <div th:each="product : ${products}">
+        <div class="product-card">
+            <img class="product-image" th:src="@{'data:image/png;base64,' + ${product.image}}" th:alt="${product.name}" alt="Product Image">
+            <h3 th:text="${product.name}"></h3>
+            <p>ราคา: ฿<span th:text="${product.price}"></span></p>
+            <p>หมวดหมู่: <span th:text="${product.category.name}"></span></p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+</script>
+</html>
