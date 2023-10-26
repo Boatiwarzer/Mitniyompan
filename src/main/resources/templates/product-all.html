@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Midniyompan-shop Application</title>
@@ -13,7 +14,7 @@
 <!--    <input type="text" name="search" placeholder="ค้นหาชื่อผลิตภัณฑ์">-->
 <!--    <button type="submit">ค้นหา</button>-->
 <!--</form>-->
-<form th:action="@{/}">
+<form action="#" th:object="${main}">
     Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
     &nbsp;
     <input type="submit" value="Search" />
@@ -25,18 +26,24 @@
     <div th:each="product : ${products}">
         <div class="product-card">
             <img class="product-image" th:src="@{'data:image/png;base64,' + ${product.image}}" th:alt="${product.name}" alt="Product Image">
+            <!-- Adjust the width and height values as needed -->
             <h3 th:text="${product.name}"></h3>
             <p>ราคา: ฿<span th:text="${product.price}"></span></p>
             <p>หมวดหมู่: <span th:text="${product.category.name}"></span></p>
+            <td style="text-align: center">
+                <a class="btn btn-primary"
+                   th:href="@{/product/{id}(id=${product.id})}">View</a>
+            </td>
         </div>
     </div>
 </div>
 
 
+
 </body>
 <script type="text/javascript">
     function clearSearch() {
-        window.location = "[[@{/}]]";
+        window.location = "[[@{/main}]]";
     }
 </script>
 </html>

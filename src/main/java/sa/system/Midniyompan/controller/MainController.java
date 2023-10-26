@@ -17,7 +17,7 @@ import sa.system.Midniyompan.service.ProductService;
 import java.util.List;
 import java.util.UUID;
 
-
+@RequestMapping("/main")
 @Controller
 public class MainController {
 
@@ -27,7 +27,7 @@ public class MainController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/main")
+    @GetMapping("/{keyword}")
     public String getSearchProduct(Model model, @Param("keyword") String keyword) {
         List<Product> listProducts = productService.listAll(keyword);
         model.addAttribute("products", listProducts);
@@ -42,7 +42,6 @@ public class MainController {
 
         return "product-all";
     }
-
     @GetMapping("/{id}")
     public String getOneProduct(@PathVariable UUID id, Model model) {
         Product product = productService.getOneById(id);
@@ -51,14 +50,14 @@ public class MainController {
     }
 
 
-    @GetMapping("/main/add")
+    @GetMapping("/add")
     public String getProductForm(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
 
         return "product-add";
     }
 
-    @PostMapping("/main/add")
+    @PostMapping("/add")
     public String createProduct(@ModelAttribute ProductRequest product,@RequestParam("file")MultipartFile image) {
         productService.createProduct(product,image);
         return "redirect:/main";
