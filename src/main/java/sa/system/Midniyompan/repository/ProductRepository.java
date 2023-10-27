@@ -20,5 +20,4 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
             + "CONCAT(p.price, p.name, p.category.name)" + "LIKE %?1%")
     List<Product> search(@Param("keyword")String keyword);
 
-//    Page<Product> findAll(String keyword, Pageable pageable);
 }

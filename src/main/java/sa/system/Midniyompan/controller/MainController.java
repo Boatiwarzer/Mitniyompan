@@ -27,19 +27,11 @@ public class MainController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/{keyword}")
-    public String getSearchProduct(Model model, @Param("keyword") String keyword) {
+    @GetMapping
+    public String getAllProduct(Model model, @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
         List<Product> listProducts = productService.listAll(keyword);
         model.addAttribute("products", listProducts);
         model.addAttribute("keyword", keyword);
-
-        return "product-all";
-    }
-    @GetMapping
-    public String getAllProduct(Model model, @Param("keyword") String keyword) {
-        List<Product> listProducts = productService.listAll(keyword);
-        model.addAttribute("products", listProducts);
-
         return "product-all";
     }
     @GetMapping("/{id}")

@@ -39,11 +39,6 @@ public class ProductService {
         return productRepository.findById(id).get();
     }
 
-
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
-
     public void createProduct(ProductRequest request,MultipartFile file) {
         Product record = modelMapper.map(request, Product.class);
         Category category =
