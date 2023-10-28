@@ -14,6 +14,10 @@
 <div class="container">
 
     <h1 class="display-6">Midniyompan-shop</h1>
+    <div id="success-msg" class="alert alert-success"
+         th:if="${confirmOrder}">
+        Your order has been successfully submitted !
+    </div>
 
     <p><span th:text="${greeting}"></span></p>
     <div sec:authorize="isAuthenticated()">

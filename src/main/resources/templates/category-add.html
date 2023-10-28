@@ -1,14 +1,14 @@
-<!--6410450206 Puttipong Srina-->
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
   <title>Midniyompan-shop Application</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body>
+<body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
 <div th:insert="~{fragments/header :: header}"></div>
 
 

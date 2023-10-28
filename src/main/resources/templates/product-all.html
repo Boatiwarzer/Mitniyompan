@@ -30,6 +30,7 @@
             <h3 th:text="${product.name}"></h3>
             <p>ราคา: ฿<span th:text="${product.price}"></span></p>
             <p>หมวดหมู่: <span th:text="${product.category.name}"></span></p>
+
             <td style="text-align: center">
                 <a class="btn btn-primary"
                    th:href="@{/main/{id}(id=${product.id})}">View</a>

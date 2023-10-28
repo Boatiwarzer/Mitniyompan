@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
   <title>Midniyompan-shop Application</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
+  <style>
+    #blah {
+      float: left; /* สำหรับการให้รูปอยู่ด้านซ้าย */
+      margin-right: 20px;
+      max-height: 200px;
+      max-width: 200px;/* ระยะห่างของรูปภาพกับเนื้อหาอื่นๆ ทางขวา */
+    }
+  </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -35,11 +44,19 @@
       <label for="imageFile">รูปภาพ:</label>
       <input type="file" class="form-control" id="imageFile" name="file" accept="image/*" ><br><br>
       <button id="submit-button" type="submit" class="btn btn-primary">Add Product</button>
+      <img id="blah" src="https://via.placeholder.com/232x237" />
     </div>
 
 
 </form>
 </div>
-
+<script type="text/javascript">
+  imageFile.onchange = evt => {
+    const [file] = imageFile.files
+    if (file) {
+      blah.src = URL.createObjectURL(file)
+    }
+  }
+</script>
 </body>
 </html>

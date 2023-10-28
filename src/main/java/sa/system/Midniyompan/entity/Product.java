@@ -19,6 +19,11 @@ public class Product {
     private String image;
     @ManyToOne
     private Category category;
+    private String wareHouse;
+    private String status;
+    private String brand;
+
+
 }
 
 

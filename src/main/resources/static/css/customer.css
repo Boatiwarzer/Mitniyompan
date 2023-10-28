@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+}
+
+.header {
+    background: rgba(255, 0, 45.90, 0.62);
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 700;
+}
+
+.input-container {
+    margin-top: 20px;
+}
+
+label {
+    color: #8F8F8F;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    height: 34px;
+    background: #EBEBEB;
+    border-radius: 20px;
+    color: #CACACA;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 500;
+    padding: 10px;
+    margin-top: 4px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.confirm-button, .cancel-button {
+    width: 45%;
+    height: 34px;
+    color: white;
+    font-size: 13px;
+    font-family: Inter;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.confirm-button {
+    background: linear-gradient(180deg, #FF6060 0%, #AB40FF 100%);
+}
+
+.cancel-button {
+    background: #404040;
+}
+
+.image-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+img {
+    width: 100%;
+    max-width: 232px;
+    height: auto;
+}
+.image-container {
+    flex: 1;
+    text-align: center;
+    margin-right: 20px;
+}
+
+img {
+    max-width: 232px;
+    height: auto;
+}
+
+.content {
+    flex: 2;
+}

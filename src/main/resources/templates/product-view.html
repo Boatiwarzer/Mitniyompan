@@ -1,7 +1,7 @@
-<!--6410450206 Puttipong Srina-->
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
   <title>Midniyompan-shop Application</title>
@@ -29,16 +29,19 @@
     </div>
   </form>
   <br>
+  <div sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')">
+    <form action="#" th:action="@{/orders/{productId}(productId=${product.id})}" method="POST">
+      <div class="mb-3">
+        <label for="inputQuantity">Quantity</label>
+        <input id="inputQuantity" type="input" class="form-control"
+               name="quantity">
+      </div>
+      <button id="submit-button" type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+  </div>
 
 
-<!--  <form action="#" th:action="@{/orders/{menuId}(menuId=${menu.id})}" method="POST">-->
-<!--    <div class="mb-3">-->
-<!--      <label for="inputQuantity">Quantity</label>-->
-<!--      <input id="inputQuantity" type="input" class="form-control"-->
-<!--             name="quantity">-->
-<!--    </div>-->
-<!--    <button id="submit-button" type="submit" class="btn btn-primary">Add to Cart</button>-->
-<!--  </form>-->
+
 </div>
 
 

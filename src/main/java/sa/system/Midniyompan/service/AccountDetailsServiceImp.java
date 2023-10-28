@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sa.system.Midniyompan.repository.UserRepository;
-import sa.system.Midniyompan.entity.User;
+import sa.system.Midniyompan.entity.Account;
+import sa.system.Midniyompan.repository.AccountRepository;
 
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.List;
 
 
 @Service
-public class UserDetailsServiceImp implements UserDetailsService {
+public class AccountDetailsServiceImp implements UserDetailsService {
 
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
 
     @Override
@@ -28,20 +28,20 @@ public class UserDetailsServiceImp implements UserDetailsService {
             throws UsernameNotFoundException {
 
 
-        User user = userRepository.findByUsername(username);
+        Account account = accountRepository.findByUsername(username);
 
 
-        if (user == null) {
+        if (account == null) {
             throw new UsernameNotFoundException("Could not find user");
         }
 
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+        authorities.add(new SimpleGrantedAuthority(account.getRole()));
 
 
         return new org.springframework.security.core.userdetails.User(
-                user.getUsername(), user.getPassword(), authorities);
+                account.getUsername(), account.getPassword(), authorities);
     }
 }
 

@@ -5,9 +5,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import sa.system.Midniyompan.entity.Account;
 import sa.system.Midniyompan.model.SignupRequest;
-import sa.system.Midniyompan.repository.UserRepository;
-import sa.system.Midniyompan.entity.User;
+import sa.system.Midniyompan.repository.AccountRepository;
 
 
 @Service
@@ -15,7 +15,7 @@ public class SignupService {
 
 
     @Autowired
-    private UserRepository repository;
+    private AccountRepository repository;
 
 
     @Autowired
@@ -29,9 +29,9 @@ public class SignupService {
     }
 
 
-    public void createUser(SignupRequest user) {
-        User record = modelMapper.map(user, User.class);
-        record.setRole("ROLE_USER");
+    public void createManger(SignupRequest user) {
+        Account record = modelMapper.map(user, Account.class);
+        record.setRole("ROLE_STAFF");
 
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());
@@ -42,7 +42,7 @@ public class SignupService {
     }
 
 
-    public User getUser(String username) {
+    public Account getUser(String username) {
         return repository.findByUsername(username);
     }
 }

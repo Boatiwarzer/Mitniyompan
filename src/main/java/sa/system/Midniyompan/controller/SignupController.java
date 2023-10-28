@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import sa.system.Midniyompan.model.SignupRequest;
 import sa.system.Midniyompan.service.SignupService;
-import sa.system.Midniyompan.entity.User;
 
 
 @Controller
@@ -30,7 +29,7 @@ public class SignupController {
 
 
         if (signupService.isUsernameAvailable(user.getUsername())) {
-            signupService.createUser(user);
+            signupService.createManger(user);
             model.addAttribute("signupSuccess", true);
         } else {
             model.addAttribute("signupError", "Username not available");
