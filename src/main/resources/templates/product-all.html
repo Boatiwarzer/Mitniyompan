@@ -9,7 +9,6 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div th:insert="~{fragments/header :: header}"></div>
 <!--<form method="get" action="/main">-->
 <!--    <input type="text" name="search" placeholder="ค้นหาชื่อผลิตภัณฑ์">-->
 <!--    <button type="submit">ค้นหา</button>-->
@@ -21,6 +20,7 @@
     &nbsp;
     <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
 </form>
+<div th:insert="~{fragments/header :: header}"></div>
 <h1>รายการสินค้า</h1>
 <div class="product-container">
     <div th:each="product : ${products}">

@@ -29,7 +29,7 @@
     </div>
   </form>
   <br>
-  <div sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')">
+  <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
     <form action="#" th:action="@{/orders/{productId}(productId=${product.id})}" method="POST">
       <div class="mb-3">
         <label for="inputQuantity">Quantity</label>
