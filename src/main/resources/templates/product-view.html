@@ -33,16 +33,33 @@
     <form action="#" th:action="@{/orders/{productId}(productId=${product.id})}" method="POST">
       <div class="mb-3">
         <label for="inputQuantity">Quantity</label>
-        <input id="inputQuantity" type="input" class="form-control"
-               name="quantity">
+        <input id="inputQuantity" type="number" class="form-control"
+               name="quantity" th:min="1" th:value="1" pattern="[0-9]*" autocomplete="off" >
       </div>
       <button id="submit-button" type="submit" class="btn btn-primary">Add to Cart</button>
     </form>
+
+  </div>
+  <div>
+    <a th:href="@{/main/{id}/edit(id=${product.id})}"
+       id="edit-button" class="btn btn-primary" >Edit</a>
   </div>
 
 
 
 </div>
+<script>
+  document.getElementById("inputQuantity").addEventListener("input", function(event) {
+    var input = event.target;
+    var value = input.value;
+
+    // ใช้ Regular Expression เพื่อตรวจสอบว่ามีตัวเลขเท่านั้น
+    if (!/^[0-9]*$/.test(value)) {
+      input.value = value.replace(/[^0-9]/g, ''); // ลบตัวอักษรพิเศษทิ้ง
+    }
+  });
+</script>
+
 
 
 </body>

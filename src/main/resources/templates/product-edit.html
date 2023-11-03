@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Midniyompan-shop Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <style>
+    #previewImg {
+      float: left; /* สำหรับการให้รูปอยู่ด้านซ้าย */
+      margin-right: 20px;
+      max-height: 200px;
+      max-width: 200px;/* ระยะห่างของรูปภาพกับเนื้อหาอื่นๆ ทางขวา */
+    }
+  </style>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container w-50 p-3">
+  <h1 class="display-5">Edit Product</h1>
+  <form action="#" th:action="@{/main/{id}/edit(id=${product.id})}" th:object="${main}" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="inputBrand">Brand</label>
+      <input th:value="${product.brand}" id="inputBrand" type="input" class="form-control"
+             name="brand">
+    </div>
+    <div class="mb-3">
+      <label for="inputName">Name</label>
+      <input th:value="${product.name}" id="inputName" type="input" class="form-control"
+             name="name">
+    </div>
+    <div class="mb-3">
+      <label for="inputName">Category</label>
+      <select th:value="${product.category.id}" class="form-control" id="inputCategory" name="categoryId" >
+        <option th:each="category : ${categories}"
+                th:value="${category.id}" th:text="${category.name}" th:selected="${product.category.id==category.id}">
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="inputRemain">Remaining</label>
+      <input th:value="${product.remain}" id="inputRemain" type="input" class="form-control"
+             name="remain">
+    </div>
+    <div class="mb-3">
+      <label for="inputWareHouse">Warehouse</label>
+      <input th:value="${product.wareHouse}" id="inputWareHouse" type="input" class="form-control"
+             name="warehouse">
+    </div>
+    <div class="mb-3">
+      <label for="inputPrice">Price</label>
+      <input th:value="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}" id="inputPrice" type="input" class="form-control"
+             name="price">
+    </div>
+
+    <div>
+      <label for="imageFile">รูปภาพ:</label>
+      <input th:value="${'data:image/png;base64,' + product.image}"  type="file" class="form-control" id="imageFile" name="file" accept="image/*" ><br><br>
+      <button id="submit-button" type="submit" class="btn btn-primary">Edit Product</button>
+      <img id="previewImg" th:src="@{'data:image/png;base64,' + ${product.image}}" />
+    </div>
+
+
+  </form>
+</div>
+<script type="text/javascript">
+  imageFile.onchange = evt => {
+    const [file] = imageFile.files
+    if (file) {
+      previewImg.src = URL.createObjectURL(file)
+    }
+  }
+  // สร้างฟังก์ชันเพื่อแยกชื่อไฟล์จากข้อมูล base64
+  function extractFileNameFromBase64(base64String) {
+    const parts = base64String.split(';');
+    if (parts.length >= 2) {
+      const contentType = parts[0].split(':')[1];
+      const data = base64String.split(',')[1];
+      const extension = contentType.split('/')[1];
+      return `file.${extension}`;
+    }
+    return 'unknown_file';
+  }
+
+  // เรียกใช้ฟังก์ชันและแสดงชื่อไฟล์ใน input element
+  const base64Data = "${'data:image/png;base64,' + product.image}";
+  const fileName = extractFileNameFromBase64(base64Data);
+  document.getElementById('file').value = fileName;
+
+</script>
+</body>
+</html>

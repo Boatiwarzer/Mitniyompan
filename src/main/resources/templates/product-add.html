@@ -7,7 +7,7 @@
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <style>
-    #blah {
+    #previewImg {
       float: left; /* สำหรับการให้รูปอยู่ด้านซ้าย */
       margin-right: 20px;
       max-height: 200px;
@@ -21,30 +21,50 @@
   <h1 class="display-5">Add Product</h1>
   <form action="#" th:action="@{/main/add}" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
+      <label for="inputBrand">Brand</label>
+      <input id="inputBrand" type="input" class="form-control"
+             name="brand">
+    </div>
+    <div class="mb-3">
       <label for="inputName">Name</label>
       <input id="inputName" type="input" class="form-control"
              name="name">
     </div>
-
+      <div class="mb-3">
+          <label for="inputName">Category</label>
+          <select class="form-control" id="inputCategory" name="categoryId">
+              <option th:each="category : ${categories}"
+                      th:value="${category.id}" th:text="${category.name}">
+              </option>
+          </select>
+      </div>
+    <div class="mb-3">
+      <label for="inputRemain">Remaining</label>
+      <input id="inputRemain" type="input" class="form-control"
+             name="remain">
+    </div>
+    <div class="mb-3">
+      <label for="inputWareHouse">Warehouse</label>
+      <input id="inputWareHouse" type="input" class="form-control"
+             name="warehouse">
+    </div>
     <div class="mb-3">
       <label for="inputPrice">Price</label>
       <input id="inputPrice" type="input" class="form-control"
              name="price">
     </div>
-
     <div class="mb-3">
-      <label for="inputName">Category</label>
-      <select class="form-control" id="inputCategory" name="categoryId">
-        <option th:each="category : ${categories}"
-                th:value="${category.id}" th:text="${category.name}">
-        </option>
-      </select>
+      <label for="inputDetail">Detail</label>
+      <textarea id="inputDetail" type="input" class="form-control"
+                name="Detail" rows="4" cols="50"></textarea>
+      <br>
     </div>
+
     <div>
       <label for="imageFile">รูปภาพ:</label>
       <input type="file" class="form-control" id="imageFile" name="file" accept="image/*" ><br><br>
       <button id="submit-button" type="submit" class="btn btn-primary">Add Product</button>
-      <img id="blah" src="https://via.placeholder.com/232x237" />
+      <img id="previewImg" th:src="@{https://via.placeholder.com/232x237}" />
     </div>
 
 
@@ -54,7 +74,7 @@
   imageFile.onchange = evt => {
     const [file] = imageFile.files
     if (file) {
-      blah.src = URL.createObjectURL(file)
+      previewImg.src = URL.createObjectURL(file)
     }
   }
 </script>

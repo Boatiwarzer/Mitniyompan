@@ -1,6 +1,7 @@
 package sa.system.Midniyompan.entity;
 import jakarta.persistence.*;
 import lombok.Data;
+import sa.system.Midniyompan.common.Status;
 
 @Data
 @Entity
@@ -12,6 +13,7 @@ public class OrderItem {
 
 
     private int quantity;
+    private Status status;
 
 
     @ManyToOne
@@ -32,6 +34,9 @@ public class OrderItem {
     }
     public double getSubtotalTax() {
         return (product.getPrice()*(7/107)) * quantity;
+    }
+    public int getDecrease(){
+        return (product.getRemain() - quantity);
     }
 
 

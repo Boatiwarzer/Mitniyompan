@@ -48,6 +48,19 @@ public class MainController {
 
         return "product-add";
     }
+    @GetMapping("/{id}/edit")
+    public String getProductEditForm(@PathVariable UUID id,Model model) {
+        Product product = productService.getOneById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("categories",categoryService.getAllCategories());
+        return "product-edit";
+    }
+    @PostMapping("/{id}/edit")
+    public String editProduct(@PathVariable UUID id,@ModelAttribute ProductRequest product,@RequestParam("file")MultipartFile image) {
+        productService.editProduct(product,image,id);
+
+        return "redirect:/main/" + id ;
+    }
 
     @PostMapping("/add")
     public String createProduct(@ModelAttribute ProductRequest product,@RequestParam("file")MultipartFile image) {

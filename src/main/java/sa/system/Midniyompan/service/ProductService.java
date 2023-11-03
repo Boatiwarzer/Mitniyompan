@@ -61,5 +61,18 @@ public class ProductService {
     }
 
 
+    public void editProduct(ProductRequest request, MultipartFile file,UUID id) {
+        Product record = modelMapper.map(request, Product.class);
+        Category category =
+                categoryRepository.findById(request.getCategoryId()).get();
+        record.setCategory(category);
+        record.setId(id);
+        try {
+            record.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        productRepository.save(record);
+    }
 }
 

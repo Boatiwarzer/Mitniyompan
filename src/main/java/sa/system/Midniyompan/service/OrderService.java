@@ -52,28 +52,95 @@ public class OrderService {
                 orderRepository.findById(currentOrderId).get();
         Product product = productRepository.findById(productId).get();
 
-
         OrderItem item = new OrderItem();
         item.setId(new OrderItemKey(currentOrderId, productId));
         item.setPurchaseOrder(currentOrder);
         item.setProduct(product);
         item.setQuantity(request.getQuantity());
+        if (product.getRemain() <= 0) {
+            // สินค้าหมดแล้ว จะทำการจองแทนการสั่งซื้อ
+            item.setStatus(Status.RESERVE);
+        }else{
+            item.setStatus(Status.ORDER);
+        }
+        item.getDecrease();
+
         itemRepository.save(item);
     }
+    public void deleteOrder(UUID itemId) {
+        if (currentOrderId == null)
+            return; // ไม่มีออร์เดอร์ที่จะลบ
+
+        PurchaseOrder currentOrder = orderRepository.findById(currentOrderId).get();
+        Product product = productRepository.findById(itemId).get();
+
+        OrderItemKey orderItemKey = new OrderItemKey(currentOrderId, itemId);
+        OrderItem item = itemRepository.findById(orderItemKey).orElse(null);
+
+        if (item != null) {
+            itemRepository.delete(item);
+
+        }
+    }
+
     public PurchaseOrder getCurrentOrder() {
         if (currentOrderId == null)
             createNewOrder();
         return orderRepository.findById(currentOrderId).get();
     }
 
+//    public void plus(UUID productId) {
+//        PurchaseOrder currentOrder = orderRepository.findById(currentOrderId).get();
+//        OrderItem orderItem = itemRepository.findById(new OrderItemKey(currentOrderId, productId)).get();
+//
+//        // เพิ่มปริมาณสินค้าที่เลือก
+//        int newQuantity = orderItem.getQuantity() + 1;
+//        orderItem.setQuantity(newQuantity);
+//
+//        // ตรวจสอบหากสินค้าเหลือพอหรือไม่
+//        Product product = productRepository.findById(productId).get();
+//        if (product.getRemain() <= 0) {
+//            // สินค้าหมดแล้ว จะทำการจองแทนการสั่งซื้อ
+//            currentOrder.setStatus(Status.RESERVE);
+//        }
+//
+//        itemRepository.save(orderItem);
+//    }
+//    public void minus(UUID productId) {
+//        PurchaseOrder currentOrder = orderRepository.findById(currentOrderId).get();
+//        OrderItem orderItem = itemRepository.findById(new OrderItemKey(currentOrderId, productId)).get();
+//
+//        // เพิ่มปริมาณสินค้าที่เลือก
+//        if (orderItem.getQuantity() > 1){
+//            int newQuantity = orderItem.getQuantity();
+//            orderItem.setQuantity(newQuantity);
+//
+//        }
+//        else{
+//            int newQuantity = orderItem.getQuantity() - 1;
+//            orderItem.setQuantity(newQuantity);
+//        }
+//
+//        // ตรวจสอบหากสินค้าเหลือพอหรือไม่
+//        Product product = productRepository.findById(productId).get();
+//        if (product.getRemain() <= 0) {
+//            // สินค้าหมดแล้ว จะทำการจองแทนการสั่งซื้อ
+//            currentOrder.setStatus(Status.RESERVE);
+//        }
+//
+//        itemRepository.save(orderItem);
+//    }
 
     public void submitOrder() {
         PurchaseOrder currentOrder =
                 orderRepository.findById(currentOrderId).get();
         currentOrder.setTimestamp(LocalDateTime.now());
-        currentOrder.setStatus(Status.CONFIRM);
+        if (currentOrder.getStatus() != Status.RESERVE){
+            currentOrder.setStatus(Status.CONFIRM);
+        }
         orderRepository.save(currentOrder);
         currentOrderId = null;
+
     }
     public List<PurchaseOrder> getAllOrders() {
         return orderRepository.findAll();

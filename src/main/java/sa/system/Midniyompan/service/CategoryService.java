@@ -9,6 +9,7 @@ import sa.system.Midniyompan.repository.CategoryRepository;
 
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -25,6 +26,9 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
+    }
+    public Category getOneById(UUID id) {
+        return categoryRepository.findById(id).get();
     }
 
 

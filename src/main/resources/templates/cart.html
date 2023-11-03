@@ -18,22 +18,44 @@
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
         <tr style="text-align: center; vertical-align: top; " class="table-secondary">
+            <th></th>
             <th>Product</th>
+            <th>Status</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Subtotal</th>
+            <th>
+<!--                <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')">Delete</button>-->
+            </th>
+
         </tr>
         </thead>
         <tbody>
         <tr th:if="${cart ne null}" th:each="item : ${cart.items}" >
+            <td>
+                <input type="checkbox" id="check" name="check" th:attr="data-product-id=${item.product.id}">
+            </td>
             <td th:text="${item.product.name}"></td>
+            <td th:text="${item.status}"></td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 2, 'POINT')}"></td>
-            <td style="text-align: right" th:text="${item.quantity}"></td>
+            <td style="text-align: right">
+                <button onclick="decrementQuantity('${item.product.id}')">-</button>
+                <span id="quantityDisplay_${item.product.id}" th:text="${item.quantity}"></span>
+                <button onclick="incrementQuantity('${item.product.id}')">+</button>
+            </td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 2, 'POINT')}"></td>
+            <td>
+            <td>
+            <form action="#">
+                <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')" type="submit">Delete</button>
+            </form>
+
+            </td>
+
+
         </tr>
         </tbody>
     </table>
-
 
     <p th:if="${cart ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(cart.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
@@ -42,6 +64,65 @@
         <button id="submit-button" type="submit" class="btn btn-primary">Submit Order</button>
     </form>
 </div>
+<!--<script>-->
+<!--    // JavaScript function to decrement quantity-->
+<!--    function decrementQuantity(productId) {-->
+<!--        // หาส่วนของ HTML ที่มี id ให้เราในรายการสินค้า-->
+<!--        const quantityDisplay = document.getElementById(`quantityDisplay_${productId}`);-->
+
+<!--        // ตรวจสอบว่าข้อมูลปริมาณปัจจุบันถูกแสดงอยู่ในอิลิเมนต์ <span>-->
+<!--        if (quantityDisplay) {-->
+<!--            let currentQuantity = parseInt(quantityDisplay.textContent); // ดึงปริมาณปัจจุบันและแปลงเป็นตัวเลข-->
+<!--            if (!isNaN(currentQuantity) && currentQuantity > 0) {-->
+<!--                // ลดปริมาณลง 1 (หรือจะลดเท่าไหร่ก็แล้วแต่คุณต้องการ)-->
+<!--                currentQuantity&#45;&#45;;-->
+
+<!--                // อัพเดตปริมาณในอิลิเมนต์ <span>-->
+<!--                quantityDisplay.textContent = currentQuantity;-->
+
+<!--                // ทำสิ่งที่คุณต้องการอื่น ๆ เช่น ส่งคำขอแก้ไขสินค้าไปยังเซิร์ฟเวอร์-->
+<!--                // โดยใช้ AJAX หรือการโหลดหน้าใหม่ ๆ ตามความเหมาะสม-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+
+<!--    // JavaScript function to increment quantity-->
+<!--    function incrementQuantity(productId) {-->
+<!--        // หาส่วนของ HTML ที่มี id ให้เราในรายการสินค้า-->
+<!--        const quantityDisplay = document.getElementById(`quantityDisplay_${productId}`);-->
+
+<!--        // ตรวจสอบว่าข้อมูลปริมาณปัจจุบันถูกแสดงอยู่ในอิลิเมนต์ <span>-->
+<!--        if (quantityDisplay) {-->
+<!--            let currentQuantity = parseInt(quantityDisplay.textContent); // ดึงปริมาณปัจจุบันและแปลงเป็นตัวเลข-->
+<!--            if (!isNaN(currentQuantity)) {-->
+<!--                // เพิ่มปริมาณขึ้น 1 (หรือจะเพิ่มเท่าไหร่ก็แล้วแต่คุณต้องการ)-->
+<!--                currentQuantity++;-->
+
+<!--                // อัพเดตปริมาณในอิลิเมนต์ <span>-->
+<!--                quantityDisplay.textContent = currentQuantity;-->
+
+<!--                // ทำสิ่งที่คุณต้องการอื่น ๆ เช่น ส่งคำขอแก้ไขสินค้าไปยังเซิร์ฟเวอร์-->
+<!--                // โดยใช้ AJAX หรือการโหลดหน้าใหม่ ๆ ตามความเหมาะสม-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--    function removeItem(productId) {-->
+<!--        // หาส่วนของ HTML ที่มี data-product-id เท่ากับ productId-->
+<!--        const checkbox = document.getElementById(`checkbox${productId}`);-->
+
+<!--        // ตรวจสอบว่า checkbox ถูกติ๊กหรือไม่-->
+<!--        if (checkbox.checked) {-->
+<!--            // หาอิลิเมนต์ของแถวที่มี checkbox-->
+<!--            const row = checkbox.closest("tr");-->
+<!--            if (row) {-->
+<!--                // ลบแถวนี้ออก-->
+<!--                row.remove();-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+
+
+<!--</script>-->
 </body>
 </html>
 

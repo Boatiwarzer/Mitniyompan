@@ -19,4 +19,8 @@ public class ProductRequest {
     private String name;
     private double price;
     private String image;
+    private int remain;
+    private String brand;
+    private String warehouse;
+    private String detail;
 }

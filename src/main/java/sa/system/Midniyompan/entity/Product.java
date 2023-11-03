@@ -1,6 +1,8 @@
 package sa.system.Midniyompan.entity;
 import jakarta.persistence.*;
 import lombok.Data;
+import sa.system.Midniyompan.common.Status;
+
 import java.sql.Blob;
 
 import java.util.UUID;
@@ -14,14 +16,15 @@ public class Product {
     private UUID id;
     private String name;
     private double price;
+    private int remain;
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
     @ManyToOne
     private Category category;
     private String wareHouse;
-    private String status;
     private String brand;
+    private String detail;
 
 
 }
