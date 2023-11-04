@@ -8,7 +8,7 @@
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
+<body sec:authorize="isAuthenticated()">
 <div th:insert="~{fragments/header :: header}"></div>
 
 

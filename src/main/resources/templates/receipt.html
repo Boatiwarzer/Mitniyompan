@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Midniyompan-shop Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+    <h1 class="display-6">Product Detail</h1>
+
+
+    <form action="#" th:object="${main}">
+        <div class="mb-3">
+            <label for="inputName">Name</label>
+            <input disabled th:value="${product.name}"
+                   name="name" id="inputName" type="text" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="inputPrice">Price</label>
+            <input disabled th:value="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"
+                   name="price" id="inputPrice" type="text" class="form-control">
+        </div>
+    </form>
+    <br>
+    <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
+        <form action="#" th:action="@{/orders/{productId}(productId=${product.id})}" method="POST">
+            <div class="mb-3">
+                <label for="inputQuantity">Quantity</label>
+                <input id="inputQuantity" type="number" class="form-control"
+                       name="quantity" th:min="1" th:value="1" pattern="[0-9]*" autocomplete="off" >
+            </div>
+
+            <button id="submit-button" type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+
+    </div>
+    <div>
+        <a th:href="@{/main/{id}/edit(id=${product.id})}"
+           id="edit-button" class="btn btn-primary" >Edit</a>
+    </div>
+
+
+
+</div>
+<script>
+    document.getElementById("inputQuantity").addEventListener("input", function(event) {
+        var input = event.target;
+        var value = input.value;
+
+        // ใช้ Regular Expression เพื่อตรวจสอบว่ามีตัวเลขเท่านั้น
+        if (!/^[0-9]*$/.test(value)) {
+            input.value = value.replace(/[^0-9]/g, ''); // ลบตัวอักษรพิเศษทิ้ง
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
+
+
+

@@ -10,7 +10,7 @@
 </head>
 <body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
 <div th:insert="~{fragments/header :: header}"></div>
-<form action="#" th:action="@{/category-add}" method="POST">
+<form action="#" th:action="@{/customer-add}" method="POST">
   <div class="container">
     <div class="image-container">
       <img src="https://via.placeholder.com/232x237" alt="Placeholder Image">
@@ -21,27 +21,23 @@
       </div>
       <div class="input-container">
         <label for="fullname">Full Name</label>
-        <input type="text" id="fullname" placeholder="Full Name">
+        <input type="input" id="fullname" name="name" placeholder="Full Name">
       </div>
       <div class="input-container">
         <label for="address">Address</label>
-        <input type="text" id="address" placeholder="Street Name, Building, House No.">
-      </div>
-      <div class="input-container">
-        <label for="province">Province, District, Postal Code</label>
-        <input type="text" id="province" placeholder="Province, District, Postal Code">
+        <input type="input" id="address" name="address" placeholder="Street Name, Building, House No.">
       </div>
       <div class="input-container">
         <label for="phone">Phone</label>
-        <input type="text" id="phone" placeholder="Phone">
+        <input type="input" id="phone" name="phone" placeholder="Phone">
       </div>
       <div class="input-container">
         <label for="taxid">Tax ID</label>
-        <input type="text" id="taxid" placeholder="Tax ID">
+        <input type="input" id="taxid" name="tax_id" placeholder="Tax ID">
       </div>
       <div class="button-container">
-        <button class="confirm-button" type="submit">Confirm</button>
-        <button class="cancel-button" href="#" onclick="location.href = document.referrer; return false;">Cancel</button>
+        <button id="submit-button" class="confirm-button" type="submit">Confirm</button>
+<!--        <button class="cancel-button" href="#" onclick="location.href = document.referrer; return false;">Cancel</button>-->
       </div>
     </div>
   </div>

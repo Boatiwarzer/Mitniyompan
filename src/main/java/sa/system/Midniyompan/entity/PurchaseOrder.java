@@ -19,6 +19,8 @@ public class PurchaseOrder {
     private Status status;
     @OneToMany(mappedBy = "purchaseOrder")
     private List<OrderItem> items = new ArrayList<>();
+    @ManyToOne
+    private Customer customer;
 
 
     public double getTotal() {

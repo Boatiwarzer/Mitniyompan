@@ -31,7 +31,7 @@ public class SignupService {
 
     public void createManger(SignupRequest user) {
         Account record = modelMapper.map(user, Account.class);
-        record.setRole("ROLE_STAFF");
+        record.setRole("ROLE_MANAGER");
 
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());

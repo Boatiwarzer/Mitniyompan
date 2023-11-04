@@ -19,7 +19,7 @@ import java.util.UUID;
 @Service
 public class CustomerService {
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
     @Autowired
     private ModelMapper modelMapper;
     public Customer getOneById(UUID id) {

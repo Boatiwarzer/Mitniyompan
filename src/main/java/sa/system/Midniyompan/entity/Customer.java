@@ -17,6 +17,8 @@ public class Customer {
     private String tax_id;
     @OneToMany(mappedBy = "customer")
     private List<FormPO> formPO;
+    @OneToMany(mappedBy = "customer")
+    private List<PurchaseOrder> purchaseOrders;
 
 
 }

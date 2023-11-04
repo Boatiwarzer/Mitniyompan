@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import sa.system.Midniyompan.entity.Customer;
 import sa.system.Midniyompan.entity.PurchaseOrder;
 import sa.system.Midniyompan.model.AddCartRequest;
+import sa.system.Midniyompan.model.FormRequest;
+import sa.system.Midniyompan.model.OrderRequest;
 import sa.system.Midniyompan.service.CustomerService;
 import sa.system.Midniyompan.service.FormPOService;
 import sa.system.Midniyompan.service.OrderService;
@@ -37,11 +39,11 @@ public class OrderController {
     @GetMapping
     public String viewCart(Model model) {
         model.addAttribute("cart", orderService.getCurrentOrder());
+        model.addAttribute("customers",customerService.listAll());
         return "cart";
     }
-    @GetMapping("/cart/FormP0")
-    public String viewForm(Model model, UUID orderId){
-        model.addAttribute("customer",customerService.listAll());
+    @GetMapping("/{orderId}FormPO")
+    public String viewForm(@PathVariable UUID orderId ,Model model){
         model.addAttribute("purchaseOrder",orderService.getById(orderId));
         return "FormPO";
     }
@@ -63,10 +65,15 @@ public class OrderController {
         return "cart";
     }
     @PostMapping
-    public String submitOrder(@PathVariable UUID productId,Model model) {
-        orderService.submitOrder();
+    public String submitOrder(@ModelAttribute OrderRequest request, Model model,UUID id) {
+        orderService.submitOrder(request,id);
         model.addAttribute("confirmOrder", true);
-        return "FormPO";
+        return "redirect:/orders/" + id + "FormPO";
+    }
+    @PostMapping("/{orderId}FormPO")
+    public String submitFormPO(@ModelAttribute FormRequest request) {
+        formPOService.createForm(request);
+        return "redirect:/main";
     }
 
 }

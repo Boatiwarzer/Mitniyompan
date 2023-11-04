@@ -25,7 +25,7 @@
             <th>Quantity</th>
             <th>Subtotal</th>
             <th>
-<!--                <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')">Delete</button>-->
+                <!--                <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')">Delete</button>-->
             </th>
 
         </tr>
@@ -46,9 +46,9 @@
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 2, 'POINT')}"></td>
             <td>
             <td>
-            <form action="#">
-                <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')" type="submit">Delete</button>
-            </form>
+                <form action="#">
+                    <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')" type="submit">Delete</button>
+                </form>
 
             </td>
 
@@ -61,7 +61,15 @@
 
 
     <form action="#" th:action="@{/orders}" method="POST">
-        <button id="submit-button" type="submit" class="btn btn-primary">Submit Order</button>
+        <div class="mb-3">
+            <label for="inputCustomer">Customer</label>
+            <select class="form-control" id="inputCustomer" name="customerId">
+                <option th:each="customer : ${customers}"
+                        th:value="${customer.id}" th:text="${customer.name}">
+                </option>
+            </select>
+        </div>
+        <button th:href="@{/orders/{orderId}FormPO(orderId=${cart.id})}" id="submit-button" type="submit" class="btn btn-primary">Submit Order</button>
     </form>
 </div>
 <!--<script>-->
@@ -125,4 +133,3 @@
 <!--</script>-->
 </body>
 </html>
-

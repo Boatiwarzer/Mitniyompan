@@ -11,21 +11,21 @@ import sa.system.Midniyompan.service.CustomerService;
 import sa.system.Midniyompan.service.OrderService;
 
 import java.util.UUID;
-@RequestMapping("/customer-add")
 @Controller
+@RequestMapping("/customer-add")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+        @GetMapping
+        public String showCustomerForm() {
+            // รายการโค้ดที่คุณต้องการเพิ่มเข้ามา
+            return "customer-add";
+        }
 
-    @PostMapping("/customer-add")
-    public String createCustomer(@ModelAttribute CustomerRequest customer){
+    @PostMapping
+    public String createCustomer(@ModelAttribute CustomerRequest customer) {
         customerService.createCustomer(customer);
         return "redirect:/main";
-    }
-    @GetMapping
-    public String getCustomerAll(Model model) {
-        model.addAttribute("customers", customerService.listAll());
-        return "customer-add";
     }
 }

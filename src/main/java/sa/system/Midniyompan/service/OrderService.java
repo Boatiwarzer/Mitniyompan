@@ -2,11 +2,10 @@ package sa.system.Midniyompan.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sa.system.Midniyompan.entity.OrderItem;
-import sa.system.Midniyompan.entity.OrderItemKey;
-import sa.system.Midniyompan.entity.Product;
-import sa.system.Midniyompan.entity.PurchaseOrder;
+import sa.system.Midniyompan.entity.*;
 import sa.system.Midniyompan.model.AddCartRequest;
+import sa.system.Midniyompan.model.OrderRequest;
+import sa.system.Midniyompan.repository.CustomerRepository;
 import sa.system.Midniyompan.repository.OrderItemRepository;
 import sa.system.Midniyompan.repository.ProductRepository;
 import sa.system.Midniyompan.repository.PurchaseOrderRepository;
@@ -33,6 +32,8 @@ public class OrderService {
 
 
     private UUID currentOrderId;
+    @Autowired
+    private CustomerRepository customerRepository;
 
 
     public void createNewOrder() {
@@ -58,7 +59,6 @@ public class OrderService {
         item.setProduct(product);
         item.setQuantity(request.getQuantity());
         if (product.getRemain() <= 0) {
-            // สินค้าหมดแล้ว จะทำการจองแทนการสั่งซื้อ
             item.setStatus(Status.RESERVE);
         }else{
             item.setStatus(Status.ORDER);
@@ -131,13 +131,17 @@ public class OrderService {
 //        itemRepository.save(orderItem);
 //    }
 
-    public void submitOrder() {
+    public void submitOrder(OrderRequest request,UUID id) {
         PurchaseOrder currentOrder =
                 orderRepository.findById(currentOrderId).get();
         currentOrder.setTimestamp(LocalDateTime.now());
         if (currentOrder.getStatus() != Status.RESERVE){
-            currentOrder.setStatus(Status.CONFIRM);
+            currentOrder.setStatus(Status.InProcess);
         }
+        Customer customer =
+                customerRepository.findById(request.getCustomerId()).get();
+        currentOrder.setCustomer(customer);
+        currentOrder.setId(id);
         orderRepository.save(currentOrder);
         currentOrderId = null;
 
