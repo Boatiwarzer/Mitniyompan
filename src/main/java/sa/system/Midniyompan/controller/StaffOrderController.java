@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sa.system.Midniyompan.service.FormPOService;
 import sa.system.Midniyompan.service.OrderService;
 
 
@@ -20,23 +21,24 @@ public class StaffOrderController {
 
     @Autowired
     private OrderService orderService;
-
+    @Autowired
+    private FormPOService formPOService;
 
     @GetMapping
     public String getAllOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
+        model.addAttribute("orders", formPOService.getAll());
         return "order-all";
     }
     @GetMapping("/{orderId}")
     public String getAllOrders(@PathVariable UUID orderId, Model model) {
-        model.addAttribute("order", orderService.getById(orderId));
+        model.addAttribute("order", formPOService.getOneById(orderId));
         return "order-view";
     }
 
 
     @PostMapping("/{orderId}/finish")
     public String finishOrder(@PathVariable UUID orderId, Model model) {
-        orderService.finishOrder(orderId);
+        formPOService.finishOrder(orderId);
         return "redirect:/staff/orders";
     }
 

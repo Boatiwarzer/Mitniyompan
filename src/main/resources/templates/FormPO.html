@@ -11,15 +11,6 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="container w-50 p-3">
     <h1 class="display-5">ข้อมูลทั่วไปทำใบสั่งซื้อ</h1>
-    <form action="#" th:action="@{/cart/{id}FormPO(id=${purchaseOrder.id})}" method="POST" >
-        <div class="mb-3">
-            <label for="inputNameManager">ManagerName</label>
-            <input class="form-control" id="inputNameManager" name="nameManagerId">
-        </div>
-        <div>
-            <label for="inputPurchaseId">PurchaseId</label>
-            <input disabled th:value="${purchaseOrder.id}" class="form-control" id="inputPurchaseId" name="PurchaseId">
-        </div>
         <div>
             <h3>Customer</h3>
             <div class="mb-3">
@@ -31,8 +22,8 @@
                 <input disabled th:value="${purchaseOrder.customer.phone}" class="form-control" id="inputPhone" name="phone">
             </div>
             <div class="mb-3">
-                <label for="inputAddress">phone</label>
-                <textarea disabled th:value="${purchaseOrder.customer.address}" id="inputAddress" type="input" class="form-control"
+                <label for="inputAddress">address</label>
+                <textarea disabled th:value="${purchaseOrder.customer.address}" th:text="${purchaseOrder.customer.address}" id="inputAddress" type="input" class="form-control"
                           name="Address" rows="4" cols="50"></textarea>
                 <br>
             </div>
@@ -41,12 +32,18 @@
                 <input disabled th:value="${purchaseOrder.customer.tax_id}" class="form-control" id="inputTax" name="Tax">
             </div>
         </div>
-
-
-
+    <form action="#" th:action="@{/orders/FormPO}" th:object="${FormPO}" method="POST">
+        <div class="mb-3">
+            <label for="inputManagerName">ManagerName</label>
+            <input class="form-control" id="inputManagerName" name="managerName">
+        </div>
+        <div class="mb-3">
+            <label for="inputName">purchaseId</label>
+            <input th:value="${purchaseOrder.id}" class="form-control" id="inputCategory" th:name="${'purchaseOrderId'}">
+        </div>
         <button id="submit-button" type="submit" class="btn btn-primary">Save</button>
-
     </form>
+
 </div>
 </body>
 </html>

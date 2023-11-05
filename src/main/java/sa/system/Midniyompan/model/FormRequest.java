@@ -7,6 +7,5 @@ import java.util.UUID;
 @Data
 public class FormRequest {
     private UUID purchaseOrderId;
-    private UUID customerId;
-    private String name;
+    private String managerName;
 }

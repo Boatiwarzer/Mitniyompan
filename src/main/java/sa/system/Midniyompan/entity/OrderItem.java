@@ -13,8 +13,6 @@ public class OrderItem {
 
 
     private int quantity;
-    private Status status;
-
 
     @ManyToOne
     @MapsId("orderId")

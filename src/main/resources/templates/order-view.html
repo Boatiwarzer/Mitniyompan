@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${order ne null}" th:each="item : ${order.items}" >
+    <tr th:if="${order ne null}" th:each="item : ${order.purchaseOrder.items}" >
       <td th:text="${item.product.name}"></td>
       <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')}"></td>
       <td style="text-align: right" th:text="${item.quantity}"></td>
@@ -35,7 +35,7 @@
   </table>
 
 
-  <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+  <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
 
   <form action="#"

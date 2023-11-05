@@ -13,41 +13,38 @@
 
 
 <div class="container w-50 p-3">
-    <h1 class="display-6">Product Detail</h1>
+    <h1 class="display-6">Order</h1>
 
 
-    <form action="#" th:object="${main}">
-        <div class="mb-3">
-            <label for="inputName">Name</label>
-            <input disabled th:value="${product.name}"
-                   name="name" id="inputName" type="text" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="inputPrice">Price</label>
-            <input disabled th:value="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"
-                   name="price" id="inputPrice" type="text" class="form-control">
-        </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr style="text-align: center; vertical-align: top; " class="table-secondary">
+            <th>No</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${receipts ne null}" th:each="item : ${receipts.purchaseOrder.items}" >
+            <td th:text="${item.product.name}"></td>
+            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: right" th:text="${item.quantity}"></td>
+            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p th:if="${order ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(order.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+
+
+    <form action="#"
+          th:action="@{/staff/orders/{orderId}/finish(orderId=${order.id})}"
+          method="POST">
+        <button id="submit-button" type="submit"
+                class="btn btn-primary">Finish Order</button>
     </form>
-    <br>
-    <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
-        <form action="#" th:action="@{/orders/{productId}(productId=${product.id})}" method="POST">
-            <div class="mb-3">
-                <label for="inputQuantity">Quantity</label>
-                <input id="inputQuantity" type="number" class="form-control"
-                       name="quantity" th:min="1" th:value="1" pattern="[0-9]*" autocomplete="off" >
-            </div>
-
-            <button id="submit-button" type="submit" class="btn btn-primary">Add to Cart</button>
-        </form>
-
-    </div>
-    <div>
-        <a th:href="@{/main/{id}/edit(id=${product.id})}"
-           id="edit-button" class="btn btn-primary" >Edit</a>
-    </div>
-
-
-
 </div>
 <script>
     document.getElementById("inputQuantity").addEventListener("input", function(event) {

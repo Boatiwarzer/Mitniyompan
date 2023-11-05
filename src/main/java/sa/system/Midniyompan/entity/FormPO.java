@@ -15,6 +15,7 @@ public class FormPO {
     private UUID id;
     private LocalDateTime timestamp;
     private Status status;
+    private String managerName;
     @OneToOne
     PurchaseOrder purchaseOrder;
     @ManyToOne

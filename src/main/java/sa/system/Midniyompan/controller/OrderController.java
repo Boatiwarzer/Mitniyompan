@@ -32,7 +32,7 @@ public class OrderController {
 
     @PostMapping("/{productId}")
     public String order(@PathVariable UUID productId,
-                        @ModelAttribute AddCartRequest request, Model model){
+                        @ModelAttribute AddCartRequest request){
         orderService.order(productId, request);
         return "redirect:/main";
     }
@@ -42,39 +42,28 @@ public class OrderController {
         model.addAttribute("customers",customerService.listAll());
         return "cart";
     }
-    @GetMapping("/{orderId}FormPO")
-    public String viewForm(@PathVariable UUID orderId ,Model model){
-        model.addAttribute("purchaseOrder",orderService.getById(orderId));
+    @GetMapping("/FormPO")
+    public String viewForm(Model model){
+        model.addAttribute("purchaseOrder",orderService.getOrder());
+        model.addAttribute("pos",orderService.getAllOrders());
         return "FormPO";
     }
-//    @PostMapping("/increment")
-//    public String incrementQuantity() {
-//        orderService.plus();
-//        return "redirect:/";
-//    }
-//
-//    @PostMapping("/decrement")
-//    public String decrementQuantity() {
-//        cartService.decrementQuantity();
-//        return "redirect:/";
-//    }
-    @PostMapping("/delete")
-    public String deleteOrder(@PathVariable UUID item,Model model) {
-        orderService.deleteOrder(item);
-        model.addAttribute("cart", orderService.getCurrentOrder());
-        return "cart";
-    }
+
+
     @PostMapping
-    public String submitOrder(@ModelAttribute OrderRequest request, Model model,UUID id) {
-        orderService.submitOrder(request,id);
+    public String submitOrder(@ModelAttribute OrderRequest request, Model model) {
+        orderService.submitOrder(request);
         model.addAttribute("confirmOrder", true);
-        return "redirect:/orders/" + id + "FormPO";
+        return "redirect:/orders/FormPO";
+
     }
-    @PostMapping("/{orderId}FormPO")
-    public String submitFormPO(@ModelAttribute FormRequest request) {
+    @PostMapping("/FormPO")
+    public String submitFormPO(@ModelAttribute FormRequest request, Model model) {
         formPOService.createForm(request);
+        model.addAttribute("confirmOrder", true);
         return "redirect:/main";
     }
+
 
 }
 

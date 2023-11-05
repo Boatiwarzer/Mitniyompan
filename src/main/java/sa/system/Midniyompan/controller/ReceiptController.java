@@ -21,10 +21,13 @@ public class ReceiptController {
     private FormPOService formPOService;
     @Autowired
     private ReceiptService receiptService;
-
-    @GetMapping
-    public String getReceiptForm(UUID formPOId, Model model) {
-        model.addAttribute("PO", formPOService.getOneById(formPOId) );
+//    @GetMapping
+//    public String getAll(Model model){
+//
+//    }
+    @GetMapping("{formPOId}")
+    public String getReceiptForm(@PathVariable UUID formPOId, Model model) {
+        model.addAttribute("receipts", formPOService.getOneById(formPOId) );
         return "receipt";
     }
     @PostMapping

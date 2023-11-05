@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import sa.system.Midniyompan.entity.*;
 import sa.system.Midniyompan.model.AddCartRequest;
 import sa.system.Midniyompan.model.OrderRequest;
-import sa.system.Midniyompan.repository.CustomerRepository;
-import sa.system.Midniyompan.repository.OrderItemRepository;
-import sa.system.Midniyompan.repository.ProductRepository;
-import sa.system.Midniyompan.repository.PurchaseOrderRepository;
+import sa.system.Midniyompan.repository.*;
 import sa.system.Midniyompan.common.Status;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,9 +29,11 @@ public class OrderService {
 
 
     private UUID currentOrderId;
+    private UUID postId;
     @Autowired
     private CustomerRepository customerRepository;
-
+    @Autowired
+    private FormPORepository formPORepository;
 
     public void createNewOrder() {
         PurchaseOrder newOrder = new PurchaseOrder();
@@ -55,15 +54,16 @@ public class OrderService {
 
         OrderItem item = new OrderItem();
         item.setId(new OrderItemKey(currentOrderId, productId));
+        if (product.getRemain() <= 0) {
+            currentOrder.setStatus(Status.RESERVE);
+        }else{
+            currentOrder.setStatus(Status.ORDER);
+        }
         item.setPurchaseOrder(currentOrder);
         item.setProduct(product);
         item.setQuantity(request.getQuantity());
-        if (product.getRemain() <= 0) {
-            item.setStatus(Status.RESERVE);
-        }else{
-            item.setStatus(Status.ORDER);
-        }
-        item.getDecrease();
+
+        product.setRemain(item.getDecrease());
 
         itemRepository.save(item);
     }
@@ -88,50 +88,14 @@ public class OrderService {
             createNewOrder();
         return orderRepository.findById(currentOrderId).get();
     }
+    public PurchaseOrder getOrder() {
 
-//    public void plus(UUID productId) {
-//        PurchaseOrder currentOrder = orderRepository.findById(currentOrderId).get();
-//        OrderItem orderItem = itemRepository.findById(new OrderItemKey(currentOrderId, productId)).get();
-//
-//        // เพิ่มปริมาณสินค้าที่เลือก
-//        int newQuantity = orderItem.getQuantity() + 1;
-//        orderItem.setQuantity(newQuantity);
-//
-//        // ตรวจสอบหากสินค้าเหลือพอหรือไม่
-//        Product product = productRepository.findById(productId).get();
-//        if (product.getRemain() <= 0) {
-//            // สินค้าหมดแล้ว จะทำการจองแทนการสั่งซื้อ
-//            currentOrder.setStatus(Status.RESERVE);
-//        }
-//
-//        itemRepository.save(orderItem);
-//    }
-//    public void minus(UUID productId) {
-//        PurchaseOrder currentOrder = orderRepository.findById(currentOrderId).get();
-//        OrderItem orderItem = itemRepository.findById(new OrderItemKey(currentOrderId, productId)).get();
-//
-//        // เพิ่มปริมาณสินค้าที่เลือก
-//        if (orderItem.getQuantity() > 1){
-//            int newQuantity = orderItem.getQuantity();
-//            orderItem.setQuantity(newQuantity);
-//
-//        }
-//        else{
-//            int newQuantity = orderItem.getQuantity() - 1;
-//            orderItem.setQuantity(newQuantity);
-//        }
-//
-//        // ตรวจสอบหากสินค้าเหลือพอหรือไม่
-//        Product product = productRepository.findById(productId).get();
-//        if (product.getRemain() <= 0) {
-//            // สินค้าหมดแล้ว จะทำการจองแทนการสั่งซื้อ
-//            currentOrder.setStatus(Status.RESERVE);
-//        }
-//
-//        itemRepository.save(orderItem);
-//    }
+        return orderRepository.findById(postId).get();
+    }
 
-    public void submitOrder(OrderRequest request,UUID id) {
+
+
+    public void submitOrder(OrderRequest request) {
         PurchaseOrder currentOrder =
                 orderRepository.findById(currentOrderId).get();
         currentOrder.setTimestamp(LocalDateTime.now());
@@ -141,16 +105,17 @@ public class OrderService {
         Customer customer =
                 customerRepository.findById(request.getCustomerId()).get();
         currentOrder.setCustomer(customer);
-        currentOrder.setId(id);
         orderRepository.save(currentOrder);
+        postId = (currentOrder.getId());
         currentOrderId = null;
 
     }
-    public List<PurchaseOrder> getAllOrders() {
-        return orderRepository.findAll();
-    }
+
     public PurchaseOrder getById(UUID orderId) {
         return orderRepository.findById(orderId).get();
+    }
+    public List<PurchaseOrder> getAllOrders() {
+        return orderRepository.findAll();
     }
 
 
@@ -159,6 +124,7 @@ public class OrderService {
         record.setStatus(Status.FINISH);
         orderRepository.save(record);
     }
+
 
 
 
