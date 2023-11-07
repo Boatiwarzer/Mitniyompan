@@ -48,6 +48,10 @@ public class FormPOService {
     public List<FormPO> getAll() {
         return formPORepository.findAll();
     }
+    public List<FormPO> getAllStatus(Status status) {
+        return formPORepository.findByStatus(status);
+    }
+
     public void finishOrder(UUID orderId) {
         FormPO record = formPORepository.findById(orderId).get();
         record.setStatus(Status.FINISH);

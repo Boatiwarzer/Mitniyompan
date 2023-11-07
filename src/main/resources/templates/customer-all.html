@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Mitniyompan-shop Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/customer.css}">
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
+<div id="success-c" class="alert alert-success"
+     th:if="${customerSuccess}">
+    Your create customer has been successfully submitted !
+</div>
+<div class="container w-50 p-3">
+    <h1 class="display-6">ลูกค้าทั้งหมด</h1>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr style="text-align: center; vertical-align: top; " class="table-secondary">
+            <th>Name</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${customers ne null}" th:each="customer : ${customers}" >
+            <td th:text="${customer.name}"></td>
+            <td style="text-align: right" th:text="${customer.phone}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

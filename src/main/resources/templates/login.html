@@ -5,34 +5,42 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
-  <title>Midniyompan-shop Application</title>
+  <title>Mitniyompan-shop Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/login.css}">
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body>
+<body >
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container w-50 p-3">
-  <h1 class="display-5">Login</h1>
-
-  <form th:action="@{/login}" method="POST">
+<div class="box">
+  <div class="box-title">
+    <img th:src="@{/png/logo.png}" width="310" height="280">
+  </div>
+  <div class="container">
+  <form th:action="@{/login}" method="POST" >
     <div id="error-msg" th:if="${param.error}" class="alert alert-danger">
       Invalid username or password
     </div>
     <div id="logout-msg" th:if="${param.logout}" class="alert alert-success">
       You have been logged out
     </div>
-    <div class="mb-3">
-      <label for="inputUsername">Username</label>
-      <input type="text" name="username" id="inputUsername"
-             class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="inputPassword">Password</label>
-      <input type="password" name="password" id="inputPassword"
-             class="form-control" required>
-    </div>
-    <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
+      <h2>Login to your account</h2>
+      <div class="form-group">
+<!--        <label for="inputUsername">Username</label>-->
+        <input type="text" name="username" id="inputUsername"
+               class="form-control" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+<!--        <label for="inputPassword">Password</label>-->
+        <input type="password" name="password" id="inputPassword"
+               class="form-control"placeholder="Password" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </div>
   </form>
+  </div>
+
 </div>
 
 </body>

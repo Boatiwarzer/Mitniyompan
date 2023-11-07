@@ -23,12 +23,12 @@
     <div class="mb-3">
       <label for="inputBrand">Brand</label>
       <input th:value="${product.brand}" id="inputBrand" type="input" class="form-control"
-             name="brand">
+             name="brand" required>
     </div>
     <div class="mb-3">
       <label for="inputName">Name</label>
       <input th:value="${product.name}" id="inputName" type="input" class="form-control"
-             name="name">
+             name="name" required>
     </div>
     <div class="mb-3">
       <label for="inputName">Category</label>
@@ -41,22 +41,20 @@
     <div class="mb-3">
       <label for="inputRemain">Remaining</label>
       <input th:value="${product.remain}" id="inputRemain" type="input" class="form-control"
-             name="remain">
+             name="remain" required>
     </div>
     <div class="mb-3">
       <label for="inputWareHouse">Warehouse</label>
       <input th:value="${product.wareHouse}" id="inputWareHouse" type="input" class="form-control"
-             name="warehouse">
+             name="warehouse" required>
     </div>
     <div class="mb-3">
       <label for="inputPrice">Price</label>
       <input th:value="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}" id="inputPrice" type="input" class="form-control"
-             name="price">
+             name="price" required>
     </div>
 
     <div>
-      <label for="imageFile">รูปภาพ:</label>
-      <input th:value="${'data:image/png;base64,' + product.image}"  type="file" class="form-control" id="imageFile" name="file" accept="image/*" ><br><br>
       <button id="submit-button" type="submit" class="btn btn-primary">Edit Product</button>
       <img id="previewImg" th:src="@{'data:image/png;base64,' + ${product.image}}" />
     </div>

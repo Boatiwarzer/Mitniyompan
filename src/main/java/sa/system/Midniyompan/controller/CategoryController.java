@@ -26,10 +26,17 @@ public class CategoryController {
 
 
     @PostMapping("/add")
-    public String createCategory(@ModelAttribute CategoryRequest request,
-                                 Model model) {
-        categoryService.createCategory(request);
-        return "redirect:/main";
+    public String createCategory(@ModelAttribute CategoryRequest request, Model model) {
+        if (categoryService.isCategoriesAvailable(request.getName())) {
+            categoryService.createCategory(request);
+            model.addAttribute("successCategory", true);
+            return "home";
+
+        } else {
+            model.addAttribute("categoryError", "Category not available");
+            return "category-add";
+        }
+//        return "home";
     }
 
 }

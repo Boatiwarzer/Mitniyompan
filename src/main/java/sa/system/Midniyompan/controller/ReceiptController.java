@@ -25,14 +25,21 @@ public class ReceiptController {
 //    public String getAll(Model model){
 //
 //    }
+    @GetMapping
+    public String getAll(Model model){
+        model.addAttribute("receipts",receiptService.listAll());
+        return "receipt-all";
+    }
+    @GetMapping("{id}")
+    public String getReceipt(@PathVariable UUID id, Model  model){
+    model.addAttribute("receipts",receiptService.getOneById(id));
+        return "receipt-view";
+    }
+
     @GetMapping("{formPOId}")
     public String getReceiptForm(@PathVariable UUID formPOId, Model model) {
         model.addAttribute("receipts", formPOService.getOneById(formPOId) );
-        return "receipt";
+        return "receipt-add";
     }
-    @PostMapping
-    public String createReceipt(@ModelAttribute ReceiptRequest request) {
-        receiptService.createReceipt(request);
-        return "redirect:/main";
-    }
+
 }

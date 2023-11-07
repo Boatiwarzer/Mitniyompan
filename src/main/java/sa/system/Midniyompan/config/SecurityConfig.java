@@ -29,10 +29,13 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/png/**")).permitAll()
+
+//                        .requestMatchers(new AntPathRequestMatcher("/staff/**")).hasRole("ROLE_STAFF")
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/main", true)
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout((logout) -> logout

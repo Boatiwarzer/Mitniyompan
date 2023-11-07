@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Mitniyompan-shop Application</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+  <div>
+    <img  th:src="@{/png/logowhite.png}" width="110" height="90">
+  </div>
+  <div class="mb-3">
+    <label for="inputName">Name</label>
+    <input disabled th:value="${receipts.formPO.purchaseOrder.customer.name}" class="form-control" id="inputName" name="Name">
+    <label for="inputPhone">phone</label>
+    <input disabled th:value="${receipts.formPO.purchaseOrder.customer.phone}" class="form-control" id="inputPhone" name="phone">
+    <label for="inputAddress">address</label>
+    <textarea disabled th:value="${receipts.formPO.purchaseOrder.customer.address}" th:text="${receipts.formPO.purchaseOrder.customer.address}" id="inputAddress" type="input" class="form-control"
+              name="Address" rows="4" cols="50"></textarea>
+    <br>
+  </div>
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+    <tr style="text-align: center; vertical-align: top; " class="table-secondary">
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${receipts ne null}" th:each="item : ${receipts.formPO.purchaseOrder.items}" >
+      <td></td>
+      <td th:text="${item.product.name}"></td>
+      <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')}"></td>
+      <td style="text-align: right" th:text="${item.quantity}"></td>
+      <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 1, 'COMMA', 2, 'POINT')}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <p th:if="${receipts ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(receipts.formPO.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+
+
+  <form action="#"
+        th:action="@{/receipt/{id}/(id=${receipts.id})}"
+        method="POST">
+    <button id="submit-button" type="submit"
+            class="btn btn-primary">ออกใบเสร็จ</button>
+  </form>
+</div>
+
+</body>
+</html>
+
+
+

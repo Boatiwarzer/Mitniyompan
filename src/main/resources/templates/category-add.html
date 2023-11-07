@@ -4,14 +4,16 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
-  <title>Midniyompan-shop Application</title>
+  <title>Mitniyompan-shop Application</title>
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
 <div th:insert="~{fragments/header :: header}"></div>
-
-
+<div id="error-msg" class="alert alert-danger"
+     th:if="${categoryError}">
+  <span th:text="${categoryError}"></span>
+</div>
 <div class="container w-50 p-3">
   <h1 class="display-5">Add Category</h1>
 

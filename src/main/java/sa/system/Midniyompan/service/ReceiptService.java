@@ -16,6 +16,7 @@ import sa.system.Midniyompan.repository.ProductRepository;
 import sa.system.Midniyompan.repository.ReceiptRepository;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
@@ -40,6 +41,7 @@ public class ReceiptService {
         FormPO formPO =
                 formPORepository.findById(request.getFormPOId()).get();
         record.setFormPO(formPO);
+        record.setTimestamp(LocalDateTime.now());
         receiptRepository.save(record);
     }
 

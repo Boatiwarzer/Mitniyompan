@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import sa.system.Midniyompan.entity.Category;
 import sa.system.Midniyompan.entity.Product;
+import sa.system.Midniyompan.model.AddProductRequest;
 import sa.system.Midniyompan.model.ProductRequest;
 import sa.system.Midniyompan.repository.CategoryRepository;
 import sa.system.Midniyompan.repository.ProductRepository;
@@ -50,6 +51,22 @@ public class ProductService {
             e.printStackTrace();
         }
         productRepository.save(record);
+    }
+    public void addProductPlusDelete(AddProductRequest request,UUID id){
+        Product record = modelMapper.map(request,Product.class);
+        Category category =
+                categoryRepository.findById(request.getCategoryId()).get();
+        record.setCategory(category);
+        if (request.getRemain() > 0){
+            record.setIncreaseRemain(request.getRemain());
+            record.setRemain(record.getRemain() + request.getRemain());
+        }else {
+            record.setDecreaseRemain(request.getRemain());
+            record.setRemain(record.getRemain() - request.getRemain());
+        }
+        record.setId(id);
+        productRepository.save(record);
+
     }
 
 

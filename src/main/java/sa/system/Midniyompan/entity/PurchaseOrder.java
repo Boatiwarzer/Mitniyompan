@@ -29,6 +29,18 @@ public class PurchaseOrder {
             total += item.getSubtotal();
         return total;
     }
+    public double getTax(){
+        double total = 0;
+        for (OrderItem item : items)
+            total += item.getSubtotalTax();
+        return total;
+    }
+    public double getSubtotalRealPrice(){
+        double total = 0;
+        for (OrderItem item : items)
+            total += item.getSubtotalRealPrice();
+        return total;
+    }
 
 
 }

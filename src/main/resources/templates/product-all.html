@@ -3,29 +3,20 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Midniyompan-shop Application</title>
+    <title>Mitniyompan-shop Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/home.css}">
     <link th:rel="stylesheet" th:href="@{/css/product.css}">
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<!--<form method="get" action="/main">-->
-<!--    <input type="text" name="search" placeholder="ค้นหาชื่อผลิตภัณฑ์">-->
-<!--    <button type="submit">ค้นหา</button>-->
-<!--</form>-->
-<form action="#" th:object="${main}">
-    Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
-    &nbsp;
-    <input type="submit" value="Search" />
-    &nbsp;
-    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
-</form>
+
 <div th:insert="~{fragments/header :: header}"></div>
 <h1>รายการสินค้า</h1>
 <div class="product-container">
     <div th:each="product : ${products}">
         <div class="product-card">
-            <img class="product-image" th:src="@{'data:image/png;base64,' + ${product.image}}" th:alt="${product.name}" alt="Product Image">
+            <img class="product-image" id="product-main" th:src="@{'data:image/png;base64,' + ${product.image}}" th:alt="${product.name}" alt="Product Image">
             <!-- Adjust the width and height values as needed -->
             <h3 th:text="${product.name}"></h3>
             <p>ราคา: ฿<span th:text="${product.price}"></span></p>

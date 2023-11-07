@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+</head>
+<body>
+    <div class="box">
+        <div class="box-title">
+            <img th:src="@{png/logo.png}" width="310" height="280">
+        </div>
+    <div class="container">
+        <h2>Login to your account</h2>
+        <form id="exampleForm" action="login.php" method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn">Sign In</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

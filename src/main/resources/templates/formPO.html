@@ -27,10 +27,6 @@
                           name="Address" rows="4" cols="50"></textarea>
                 <br>
             </div>
-            <div class="mb-3">
-                <label for="inputTax">Tax Id</label>
-                <input disabled th:value="${purchaseOrder.customer.tax_id}" class="form-control" id="inputTax" name="Tax">
-            </div>
         </div>
     <form action="#" th:action="@{/orders/FormPO}" th:object="${FormPO}" method="POST">
         <div class="mb-3">
@@ -38,8 +34,8 @@
             <input class="form-control" id="inputManagerName" name="managerName">
         </div>
         <div class="mb-3">
-            <label for="inputName">purchaseId</label>
-            <input th:value="${purchaseOrder.id}" class="form-control" id="inputCategory" th:name="${'purchaseOrderId'}">
+            <label for="inputPOId">purchaseId</label>
+            <input th:value="${purchaseOrder.id}" class="form-control" id="inputPOId" th:name="${'purchaseOrderId'}">
         </div>
         <button id="submit-button" type="submit" class="btn btn-primary">Save</button>
     </form>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff</title>
+    <link rel="stylesheet" type="text/css" href="info.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <img src="png/logowhite.png" width="110" height="90">
+        </div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search for products or sevices">
+            <button id="search-button">Search</button>
+        </div>
+        <div class="navbar-right">
+            <button class="button-link"><img src="png/profile.png" width="30" height="30" class="pic">Profile</button>
+            <button class="button-link"><img src="png/signout.png" width="30" height="30" class="pic">Sign Out</button>
+        </div>
+    </div>
+    <div class="back">
+        <button class="button"><img src="png/back.png" width="25" height="25" class="pic">ย้อนกลับ</button>
+    </div>
+    <div class="header-title">
+        <p>สร้างบัญชี Staff</p>
+    </div>
+    <div class="box">
+        <div class="box-title">
+            <img src="png/infoprofile.png" width="248" height="248">
+        </div>
+    <div class="container">
+        <form action="login.php" method="post">
+            <div class="info">
+                <label class="label">FullName</label>
+                <input type="text" id="fullname" name="fullname" required >
+
+                <label class="label">ID</label>
+                <input type="text" id="id" required>
+
+                <label class="label">Password</label>
+                <input type="text" id="password" required>
+
+                <label class="label">Confirm Password</label>
+                <input type="text" id="confirm" required>
+        </form>
+    </div>
+        <div class="back">
+            <button class="button-no"><img src="png/no.png" width="20" height="20" class="pic">ยกเลิก</button>
+            <button class="button-yes"><img src="png/yes.png" width="20" height="20" class="pic">ยืนยัน</button>
+        </div>
+    </div>
+</body>
+</html>

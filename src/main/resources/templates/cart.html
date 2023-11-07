@@ -20,23 +20,16 @@
         <tr style="text-align: center; vertical-align: top; " class="table-secondary">
             <th></th>
             <th>Product</th>
-            <th>Status</th>
             <th>Price</th>
             <th>Quantity</th>
             <th>Subtotal</th>
-            <th>
-                <!--                <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')">Delete</button>-->
-            </th>
+            <th></th>
 
         </tr>
         </thead>
         <tbody>
         <tr th:if="${cart ne null}" th:each="item : ${cart.items}" >
-            <td>
-                <input type="checkbox" id="check" name="check" th:attr="data-product-id=${item.product.id}">
-            </td>
             <td th:text="${item.product.name}"></td>
-            <td th:text="${item.status}"></td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 2, 'POINT')}"></td>
             <td style="text-align: right">
                 <button onclick="decrementQuantity('${item.product.id}')">-</button>

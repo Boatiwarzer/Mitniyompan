@@ -25,6 +25,11 @@ public class Product {
     private String wareHouse;
     private String brand;
     private String detail;
+    private int increaseRemain;
+    private int decreaseRemain;
+    private int reServe;
+
+
 
 
 }

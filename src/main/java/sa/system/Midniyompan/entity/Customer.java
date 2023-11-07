@@ -14,7 +14,6 @@ public class Customer {
     private String name;
     private String address;
     private String phone;
-    private String tax_id;
     @OneToMany(mappedBy = "customer")
     private List<FormPO> formPO;
     @OneToMany(mappedBy = "customer")

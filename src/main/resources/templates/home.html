@@ -3,8 +3,9 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Midniyompan-shop Application</title>
-    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <title>Mitniyompan-shop Application</title>
+    <link th:rel="stylesheet"  th:href="@{/css/home.css}">
+<!--    <link th:rel="stylesheet" th:href="@{/css/product.css}">-->
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
@@ -13,24 +14,65 @@
 
 <div class="container">
 
-    <h1 class="display-6">Midniyompan-shop</h1>
-    <div id="success-msg" class="alert alert-success"
-         th:if="${confirmOrder}">
-        Your order has been successfully submitted !
+<!--    <h1 class="display-6">Mitniyompan-shop</h1>-->
+<!--    <div id="success-msg" class="alert alert-success"-->
+<!--         th:if="${confirmOrder}">-->
+<!--        Your order has been successfully submitted !-->
+<!--    </div>-->
+    <div id="success-category" class="alert alert-success"
+         th:if="${successCategory}">
+        Your create new Category has been successfully!
     </div>
-
-    <p><span th:text="${greeting}"></span></p>
-    <div sec:authorize="isAuthenticated()">
-        <p>Role :: <b><span sec:authentication="name"></span></b></p>
-        <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
-    </div>
-    <div sec:authorize="isAnonymous()">
-        <a class="btn btn-primary" th:href="@{/login}">Login</a>
-        <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
-    </div>
-
-
 </div>
+<div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')" class="container">
+    <div class="menu">
+        <a class="button-menu" th:href="@{/main}"><img th:href="@{/main}" th:src="@{/png/product.png}" width="94" height="94" class="pic">สินค้าทั้งหมด</a>
+        <a class="button-menu" th:href="@{/orders}"><img th:href="@{/orders}" th:src="@{/png/po.png}" width="94" height="94" class="pic">ตะกร้า</a>
+        <a class="button-menu" th:href="@{/orders/order-finished}"><img th:href="@{/orders/order-finished}" th:src="@{/png/listpo.png}" width="94" height="94" class="pic">ออกใบเสร็จ</a>
+        <a class="button-menu" th:href="@{/orders/order-reserve}" ><img th:href="@{/orders/order-reserve}" th:src="@{/png/receipt.png}" width="94" height="94" class="pic">รายการคำสั่งซื้อที่จอง</a>
+    </div>
+    <div class="menu">
+        <a class="button-menu" th:href="@{/receipt/receipt-all}" ><img th:href="@{/receipt/receipt-all}" th:src="@{/png/listreceipt.png}" width="94" height="94" class="pic">รายการใบเสร้จ</a>
+        <a class="button-menu" th:href="@{/signup}"><img th:href="@{/signup}" th:src="@{/png/accountstaff.png}" width="94" height="94" class="pic">สร้างบัญชี Staff</a>
+        <a class="button-menu" th:href="@{/customer-all/customer-add}" ><img th:href="@{/customer-all/customer-add}" th:src="@{/png/customer.png}" width="94" height="94" class="pic">เพิ่มรายชื่อลูกค้า</a>
+        <a class="button-menu" th:href="@{/customer-all}"><img  th:href="@{/customer-all}" th:src="@{/png/listcustomer.png}" width="94" height="94" class="pic">รายชื่อลูกค้า</a>
+    </div>
+</div>
+<div sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')" class="container">
+    <div class="menu">
+        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/product.png}" width="94" height="94" class="pic">สินค้าทั้งหมด</a>
+        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/listpo.png}" width="94" height="94" class="pic">รายการคำสั่งซื้อ</a>
+        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/addproduct.png}" width="94" height="94" class="pic">เพิ่มสินค้า</a>
+        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/inoutproduct.png}" width="94" height="94" class="pic">ประวัติเพิ่ม/ลด</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;    <p><span th:text="${greeting}"></span></p>&ndash;&gt;-->
+<!--    <div sec:authorize="isAuthenticated()">-->
+<!--        <p>Role :: <b><span sec:authentication="name"></span></b></p>-->
+<!--        <a class="btn btn-primary" th:href="@{/logout}">Logout</a>-->
+<!--    </div>-->
+<!--    <div sec:authorize="isAnonymous()">-->
+<!--        <a class="btn btn-primary" th:href="@{/login}">Login</a>-->
+<!--        <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>-->
+<!--    </div>-->
+
+
 </body>
 </html>
 

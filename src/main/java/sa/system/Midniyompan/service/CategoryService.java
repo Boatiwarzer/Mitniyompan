@@ -30,6 +30,9 @@ public class CategoryService {
     public Category getOneById(UUID id) {
         return categoryRepository.findById(id).get();
     }
+    public boolean isCategoriesAvailable(String categories) {
+        return categoryRepository.findByName(categories) == null;
+    }
 
 
     public void createCategory(CategoryRequest request) {

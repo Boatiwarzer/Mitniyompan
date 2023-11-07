@@ -3,14 +3,17 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <meta charset="UTF-8">
+  <link th:rel="stylesheet" th:href="@{/css/home.css}">
   <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #003369" th:fragment="header">
 
   <div class="container-fluid">
-    <a class="navbar-brand" th:href="@{/main}">Midniyompan</a>
+    <a class="navbar-brand" th:href="@{/}">
+      <img th:href="@{/}" th:src="@{/png/logowhite.png}" width="110" height="90">
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,42 +21,32 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/main}">Home</a>
-        </li>
-        <li class="nav-item"
-            sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
-          <a class="nav-link" th:href="@{/main/add}">Add Product</a>
-        </li>
-        <li class="nav-item"
-            sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
-          <a class="nav-link" th:href="@{/categories/add}">Add Category</a>
-        </li>
-        <li class="nav-item"
-            sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')">
-          <a class="nav-link" th:href="@{/staff/orders}">All Orders</a>
-        </li>
-        <li class="nav-item"
-            sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
-          <a class="nav-link" th:href="@{/customer-add}">Customer</a>
-        </li>
+        <form action="#" th:object="${main}">
+          <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+          &nbsp;
+          <input type="submit" value="Search" />
+          &nbsp;
+          <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+        </form>
 
       </ul>
     </div>
     <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" th:href="@{/orders}">Cart</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item"-->
+<!--            sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">-->
+<!--          <a class="btn btn-primary" th:href="@{/signup}">Signup</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#">สวัสดี <b><span sec:authentication="name"></span></b></a>-->
+<!--        </li>-->
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/orders}">Cart</a>
-        </li>
-        <li class="nav-item"
-            sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
-          <a class="btn btn-primary" th:href="@{/signup}">Signup</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">สวัสดี <b><span sec:authentication="name"></span></b></a>
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+          <button class="button-link"><img src="png/profile.png" width="30" height="30" class="pic">Profile</button>
+          <a class="btn btn-primary" th:href="@{/logout}">
+            <img th:href="@{/logout}" th:src="@{/png/signout.png}" width="30" height="30" class="pic"></a>
         </li>
       </ul>
     </div>
@@ -63,7 +56,7 @@
           <a class="btn btn-primary" th:href="@{/login}">Login</a>
         </li>
         <li class="nav-item"
-            sec:authorize="isAuthenticated() ">>
+            sec:authorize="isAuthenticated() ">
           <a class="btn btn-primary" th:href="@{/signup}">Signup</a>
         </li>
       </ul>

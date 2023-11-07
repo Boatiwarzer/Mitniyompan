@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="order : ${orders}">
+    <tr th:each="order : ${orders}" th:if="${order.status.InProcess}">
       <td th:text="${#temporals.format(order.timestamp, 'dd/MM/yyyy HH:mm')}"></td>
       <td th:text="${order.status}"></td>
       <td style="text-align: right" th:text="${#numbers.formatDecimal(order.purchaseOrder.total, 1, 'COMMA', 2, 'POINT')}">

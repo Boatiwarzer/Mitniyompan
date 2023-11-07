@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sa.system.Midniyompan.entity.Category;
 import sa.system.Midniyompan.entity.Product;
+import sa.system.Midniyompan.model.AddProductRequest;
 import sa.system.Midniyompan.model.ProductRequest;
 import sa.system.Midniyompan.service.CategoryService;
 import sa.system.Midniyompan.service.ProductService;
@@ -40,8 +41,6 @@ public class MainController {
         model.addAttribute("product", product);
         return "product-view";
     }
-
-
     @GetMapping("/add")
     public String getProductForm(Model model) {
         model.addAttribute("categories", categoryService.getAllCategories());
@@ -55,17 +54,26 @@ public class MainController {
         model.addAttribute("categories",categoryService.getAllCategories());
         return "product-edit";
     }
+    @PostMapping("/add")
+    public String createProduct(@ModelAttribute ProductRequest product,@RequestParam("file")MultipartFile image) {
+        productService.createProduct(product,image);
+        return "redirect:/main";
+    }
     @PostMapping("/{id}/edit")
     public String editProduct(@PathVariable UUID id,@ModelAttribute ProductRequest product,@RequestParam("file")MultipartFile image) {
         productService.editProduct(product,image,id);
 
         return "redirect:/main/" + id ;
     }
-
-    @PostMapping("/add")
-    public String createProduct(@ModelAttribute ProductRequest product,@RequestParam("file")MultipartFile image) {
-        productService.createProduct(product,image);
-        return "redirect:/main";
+    @GetMapping("/{id}/addRemain")
+    public String getProductPlusDelete(@PathVariable UUID id,Model model){
+        model.addAttribute("product",productService.getOneById(id));
+        return"product-plusDelete";
+    }
+    @PostMapping("/{id}/addRemain")
+    public String addProductPlusDelete(@PathVariable UUID id, @ModelAttribute AddProductRequest request){
+        productService.addProductPlusDelete(request,id);
+        return"redirect:/main/{id}/addRemain";
     }
 }
 
