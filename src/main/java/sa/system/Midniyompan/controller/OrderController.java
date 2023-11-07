@@ -82,8 +82,8 @@ public class OrderController {
         model.addAttribute("order", formPOService.getOneById(orderId));
         return "order-viewFinished";
     }
-    @PostMapping("{formPOId}")
-    public String createReceipt(@ModelAttribute ReceiptRequest request) {
+    @PostMapping("/order-finished/{request}")
+    public String createReceipt(@PathVariable @ModelAttribute ReceiptRequest request) {
         receiptService.createReceipt(request);
         return "redirect:/receipt";
     }

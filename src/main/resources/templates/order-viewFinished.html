@@ -47,9 +47,10 @@
 <!--    <button id="submit-button" type="submit"-->
 <!--            class="btn btn-primary">ออกใบเสร็จ</button>-->
 <!--  </form>-->
-  <form action="">
-    <a class="btn btn-primary" th:href="@{/receipt{id}/(id=${order.id})}">ออกใบเสร็จ</a>
-
+  <form th:action="@{/order/order-finished/{id}(id=${order.id})}" method="POST">
+    <input type="hidden" id="input"  class="form-control"
+           name="remain" th:value="${order.id}">
+    <a class="btn btn-primary" th:href="@{/receipt/{id}/(id=${order.id})}">ออกใบเสร็จ</a>
   </form>
 
 </div>

@@ -58,11 +58,11 @@ public class ProductService {
                 categoryRepository.findById(request.getCategoryId()).get();
         record.setCategory(category);
         if (request.getRemain() > 0){
-            record.setIncreaseRemain(request.getRemain());
-            record.setRemain(record.getRemain() + request.getRemain());
+            record.setIncreaseInventory(request.getRemain());
+            record.setInventory(record.getInventory() + request.getRemain());
         }else {
-            record.setDecreaseRemain(request.getRemain());
-            record.setRemain(record.getRemain() - request.getRemain());
+            record.setDecreaseInventory(request.getRemain());
+            record.setInventory(record.getInventory() - request.getRemain());
         }
         record.setId(id);
         productRepository.save(record);

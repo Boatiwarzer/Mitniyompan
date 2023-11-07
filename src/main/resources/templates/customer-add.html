@@ -10,7 +10,7 @@
 </head>
 <body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
 <div th:insert="~{fragments/header :: header}"></div>
-<form action="#" th:action="@{/customer-add}" method="POST">
+<form action="#" th:action="@{/customer-all/customer-add}" method="POST">
   <div class="container">
     <div class="image-container">
       <img src="https://via.placeholder.com/232x237" alt="Placeholder Image">

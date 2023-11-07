@@ -18,11 +18,11 @@
   </div>
   <div class="mb-3">
     <label for="inputName">Name</label>
-    <input disabled th:value="${receipts.formPO.purchaseOrder.customer.name}" class="form-control" id="inputName" name="Name">
+    <input disabled th:value="${receipts.purchaseOrder.customer.name}" class="form-control" id="inputName" name="Name">
     <label for="inputPhone">phone</label>
-    <input disabled th:value="${receipts.formPO.purchaseOrder.customer.phone}" class="form-control" id="inputPhone" name="phone">
+    <input disabled th:value="${receipts.purchaseOrder.customer.phone}" class="form-control" id="inputPhone" name="phone">
     <label for="inputAddress">address</label>
-    <textarea disabled th:value="${receipts.formPO.purchaseOrder.customer.address}" th:text="${receipts.formPO.purchaseOrder.customer.address}" id="inputAddress" type="input" class="form-control"
+    <textarea disabled th:value="${receipts.purchaseOrder.customer.address}" th:text="${receipts.purchaseOrder.customer.address}" id="inputAddress" type="input" class="form-control"
               name="Address" rows="4" cols="50"></textarea>
     <br>
   </div>
@@ -37,7 +37,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${receipts ne null}" th:each="item : ${receipts.formPO.purchaseOrder.items}" >
+    <tr th:if="${receipts ne null}" th:each="item : ${receipts.purchaseOrder.items}" >
       <td></td>
       <td th:text="${item.product.name}"></td>
       <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 1, 'COMMA', 2, 'POINT')}"></td>
@@ -48,15 +48,15 @@
   </table>
 
 
-  <p th:if="${receipts ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(receipts.formPO.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
+  <p th:if="${receipts ne null}" style="text-align: right">Total: <span th:text="${#numbers.formatDecimal(receipts.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></span> Bahts</p>
 
 
-  <form action="#"
-        th:action="@{/receipt/{id}/(id=${receipts.id})}"
-        method="POST">
-    <button id="submit-button" type="submit"
-            class="btn btn-primary">ออกใบเสร็จ</button>
-  </form>
+<!--  <form action="#"-->
+<!--        th:action="@{/receipt/{id}/(id=${receipts.id})}"-->
+<!--        method="POST">-->
+<!--    <button id="submit-button" type="submit"-->
+<!--            class="btn btn-primary">ออกใบเสร็จ</button>-->
+<!--  </form>-->
 </div>
 
 </body>

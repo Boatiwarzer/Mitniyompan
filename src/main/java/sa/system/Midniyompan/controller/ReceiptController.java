@@ -30,16 +30,11 @@ public class ReceiptController {
         model.addAttribute("receipts",receiptService.listAll());
         return "receipt-all";
     }
-    @GetMapping("{id}")
-    public String getReceipt(@PathVariable UUID id, Model  model){
-    model.addAttribute("receipts",receiptService.getOneById(id));
-        return "receipt-view";
-    }
 
     @GetMapping("{formPOId}")
     public String getReceiptForm(@PathVariable UUID formPOId, Model model) {
         model.addAttribute("receipts", formPOService.getOneById(formPOId) );
-        return "receipt-add";
+        return "receipt-view";
     }
 
 }

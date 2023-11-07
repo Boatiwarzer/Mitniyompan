@@ -54,7 +54,7 @@ public class OrderService {
 
         OrderItem item = new OrderItem();
         item.setId(new OrderItemKey(currentOrderId, productId));
-        if (product.getRemain() <= 0) {
+        if (product.getInventory() <= 0) {
             currentOrder.setStatus(Status.RESERVE);
         }else{
             currentOrder.setStatus(Status.ORDER);
@@ -63,7 +63,7 @@ public class OrderService {
         item.setProduct(product);
         item.setQuantity(request.getQuantity());
 
-        product.setRemain(item.getDecrease());
+        product.setInventory(item.getDecrease());
 
         itemRepository.save(item);
     }

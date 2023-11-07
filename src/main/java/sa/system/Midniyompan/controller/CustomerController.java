@@ -28,10 +28,10 @@ public class CustomerController {
         return "customer-all";
     }
 
-    @PostMapping
+    @PostMapping("/customer-add")
     public String createCustomer(@ModelAttribute CustomerRequest customer,Model model) {
         customerService.createCustomer(customer);
         model.addAttribute("customerSuccess",true);
-        return "customer-all";
+        return "redirect:customer-all";
     }
 }

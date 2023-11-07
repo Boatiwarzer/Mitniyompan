@@ -32,9 +32,7 @@
             <td th:text="${item.product.name}"></td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 2, 'POINT')}"></td>
             <td style="text-align: right">
-                <button onclick="decrementQuantity('${item.product.id}')">-</button>
                 <span id="quantityDisplay_${item.product.id}" th:text="${item.quantity}"></span>
-                <button onclick="incrementQuantity('${item.product.id}')">+</button>
             </td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 2, 'POINT')}"></td>
             <td>

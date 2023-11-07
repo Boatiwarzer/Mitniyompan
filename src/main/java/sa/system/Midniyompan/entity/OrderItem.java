@@ -34,7 +34,7 @@ public class OrderItem {
         return (product.getPrice()*(7/107)) * quantity;
     }
     public int getDecrease(){
-        return (product.getRemain() - quantity);
+        return (product.getInventory() - quantity);
     }
 
 

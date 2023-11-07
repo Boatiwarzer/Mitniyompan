@@ -8,6 +8,7 @@
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
+<div th:insert="~{fragments/header :: header}"></div>
 <body sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
 <div id="success-c" class="alert alert-success"
      th:if="${customerSuccess}">

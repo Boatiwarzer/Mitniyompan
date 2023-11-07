@@ -16,7 +16,7 @@ public class Product {
     private UUID id;
     private String name;
     private double price;
-    private int remain;
+    private int inventory;
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
@@ -25,9 +25,8 @@ public class Product {
     private String wareHouse;
     private String brand;
     private String detail;
-    private int increaseRemain;
-    private int decreaseRemain;
-    private int reServe;
+    private int increaseInventory;
+    private int decreaseInventory;
 
 
 
