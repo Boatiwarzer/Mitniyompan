@@ -17,51 +17,163 @@
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container w-50 p-3">
-  <h1 class="display-5">Edit Product</h1>
-  <form action="#" th:action="@{/main/{id}/edit(id=${product.id})}" th:object="${main}" method="POST" enctype="multipart/form-data">
-    <div class="mb-3">
-      <label for="inputBrand">Brand</label>
-      <input th:value="${product.brand}" id="inputBrand" type="input" class="form-control"
-             name="brand" required>
-    </div>
-    <div class="mb-3">
-      <label for="inputName">Name</label>
-      <input th:value="${product.name}" id="inputName" type="input" class="form-control"
-             name="name" required>
-    </div>
-    <div class="mb-3">
-      <label for="inputName">Category</label>
-      <select th:value="${product.category.id}" class="form-control" id="inputCategory" name="categoryId" >
-        <option th:each="category : ${categories}"
-                th:value="${category.id}" th:text="${category.name}" th:selected="${product.category.id==category.id}">
-        </option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="inputRemain">Remaining</label>
-      <input th:value="${product.remain}" id="inputRemain" type="input" class="form-control"
-             name="remain" required>
-    </div>
-    <div class="mb-3">
-      <label for="inputWareHouse">Warehouse</label>
-      <input th:value="${product.wareHouse}" id="inputWareHouse" type="input" class="form-control"
-             name="warehouse" required>
-    </div>
-    <div class="mb-3">
-      <label for="inputPrice">Price</label>
-      <input th:value="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}" id="inputPrice" type="input" class="form-control"
-             name="price" required>
-    </div>
-
-    <div>
-      <button id="submit-button" type="submit" class="btn btn-primary">Edit Product</button>
-      <img id="previewImg" th:src="@{'data:image/png;base64,' + ${product.image}}" />
-    </div>
-
-
-  </form>
+<br>
+<div class="row">
+  <div class="col-xl-3"></div>
+  <div class="col-xl-6" style="background: rgba(255, 0, 45.90, 0.62); border-radius: 20px">
+    <h1 style="color:white;text-align: center;">แก้ไขสินค้า</h1>
+  </div>
 </div>
+<div class="row"><br><br></div>
+
+<form action="#" th:action="@{/main/{id}/edit(id=${product.id})}" method="POST" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-xl-1">
+    </div>
+    <div class="col-xl-2" style="padding-top: 5%">
+      <img class="product-image" style="width: 70%;height: 50%" th:src="@{'data:image/png;base64,' + ${product.image}}" th:alt="${product.name}" alt="Product Image">
+    </div>
+    <div class="col-xl-1"></div>
+    <div class="col-xl-7" style="padding-top: 5%">
+
+      <div class="row">
+        <div class="card">
+          <div class="row">
+            <div class="col-xl-2" ><p class="text-detail">ตรา</p> </div>
+            <div class="col-xl-3">
+<!--              <label for="inputBrand">Brand</label>-->
+              <input th:value="${product.brand}" id="inputBrand" type="input" class="form-control"
+                     name="brand" required>
+            </div>
+            <div class="col-xl-3"><p class="text-detail">ชื่อ</p> </div>
+            <div class="col-xl-3">
+<!--              <label for="inputName">Name</label>-->
+              <input th:value="${product.name}" id="inputName" type="input" class="form-control"
+                     name="name" required>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-xl-2" ><p class="text-detail">ประเภท</p> </div>
+            <div class="col-xl-3">
+<!--              <label for="inputName">Category</label>-->
+              <select th:value="${product.category.id}" class="form-control" id="inputCategory" name="categoryId" >
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}" th:text="${category.name}" th:selected="${product.category.id==category.id}">
+                </option>
+              </select>
+            </div>
+            <div class="col-xl-3"><p class="text-detail">รหัสสินค้า</p> </div>
+            <div class="col-xl-3"> <p class="text-detail" th:text="${product.id}"></p></div>
+
+          </div>
+          <div class="row">
+            <div class="col-xl-2" ><p class="text-detail">คลังสินค้า</p> </div>
+            <div class="col-xl-3">
+<!--              <label for="inputWareHouse">Warehouse</label>-->
+              <input th:value="${product.wareHouse}" id="inputWareHouse" type="input" class="form-control"
+                     name="warehouse" required>
+
+            </div>
+            <div class="col-xl-3"><p class="text-detail">ราคา</p> </div>
+            <div class="col-xl-3">
+<!--              <label for="inputPrice">Price</label>-->
+              <input th:value="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}" id="inputPrice" type="input" class="form-control"
+                     name="price" required>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-xl-2" ><p class="text-detail" >จำนวนคงคลัง</p> </div>
+            <div class="col-xl-3">
+              <!--              <label for="inputRemain">Remaining</label>-->
+              <input th:value="${product.inventory}" id="inputRemain" type="input" class="form-control"
+                     name="remain" required>
+            </div>
+            <div class="col-xl-3"> <p class="text-detail">รายละเอียด</p></div>
+
+          </div>
+          <div class="row">
+            <div class="col-xl-1"></div>
+            <div class="col-xl-2" style="padding-bottom: 5%">
+              <!--            ที่กรอกจำนวนสินค้า-->
+              <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
+
+                <label for="inputQuantity">Quantity</label>
+                <input id="inputQuantity" type="number" class="form-control"
+                       name="quantity" th:min="1" th:max="500"th:value="1" pattern="[0-9]*" autocomplete="off" >
+              </div>
+            </div>
+
+            <div class="col-xl-2"></div>
+            <div class="col-xl-5">
+              <div class="card" style="background-color: #D9D9D9">
+                <p th:text="${product.detail}"></p>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xl-3">
+        </div>
+        <div class="col-xl-2">
+          <!--        ปุ่มเพิ่มเข้าตะกร้า-->
+          <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
+            <button id="submit-button" type="submit" class="btn btn-primary">เพิ่มเข้าตะกร้า</button>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')">
+            <button id="edit-button" type="submit" class="btn btn-primary">ยืนยันแก้ไขสินค้า</button>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')">
+
+            <!--          <button id="add-button" type="submit" class="btn btn-primary">เพิ่มลดสินค้า</button>-->
+            <a th:href="@{/main/add}"
+               id="add-button" class="btn btn-primary" >เพิ่มลดสินค้า</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--<div class="container w-50 p-3">-->
+<!--  <form action="#" th:action="@{/main/{id}/edit(id=${product.id})}" th:object="${main}" method="POST" enctype="multipart/form-data">-->
+<!--    <div class="mb-3">-->
+
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--      <button id="submit-button" type="submit" class="btn btn-primary">Edit Product</button>-->
+<!--      <img id="previewImg" th:src="@{'data:image/png;base64,' + ${product.image}}" />-->
+<!--    </div>-->
+
+
+<!--  </form>-->
+<!--</div>-->
 <script type="text/javascript">
   imageFile.onchange = evt => {
     const [file] = imageFile.files
