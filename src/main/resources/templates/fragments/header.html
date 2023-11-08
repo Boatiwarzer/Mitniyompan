@@ -33,9 +33,9 @@
     </div>
     <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" th:href="@{/orders}">Cart</a>-->
-<!--        </li>-->
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/orders}">Cart</a>
+        </li>
 <!--        <li class="nav-item"-->
 <!--            sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')">-->
 <!--          <a class="btn btn-primary" th:href="@{/signup}">Signup</a>-->
@@ -44,7 +44,7 @@
 <!--          <a class="nav-link" href="#">สวัสดี <b><span sec:authentication="name"></span></b></a>-->
 <!--        </li>-->
         <li class="nav-item">
-          <button class="button-link"><img src="png/profile.png" width="30" height="30" class="pic">Profile</button>
+          <button class="button-link"><img th:src="@{/png/profile.png}" width="30" height="30" class="btn btn-light">Profile</button>
           <a class="btn btn-primary" th:href="@{/logout}">
             <img th:href="@{/logout}" th:src="@{/png/signout.png}" width="30" height="30" class="pic"></a>
         </li>

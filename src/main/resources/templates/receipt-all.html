@@ -23,22 +23,20 @@
             <th>ชื่อผู้ขาย</th>
             <th>ชืื่อผู้ซื้อ</th>
             <th>ยอดเงินรวม</th>
-            <th>วันที่</th>
+            <th>วันที่-เวลา</th>
             <th> </th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${receipts ne null}" th:each="receipt : ${receipts}" >
-            <td></td>
             <td th:text="${receipt.id}"></td>
             <td th:text="${receipt.formPO.managerName}"></td>
             <td th:text="${receipt.formPO.customer.name}"></td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(receipt.formPO.purchaseOrder.getTotal(), 1, 'COMMA', 2, 'POINT')}"></td>
             <td style="text-align: right" th:text="${#temporals.format(receipt.timestamp, 'dd/MM/yyyy HH:mm')}"></td>
             <td style="text-align: center">
-                <a th:href="@{/receipt-all/{id}(id=${receipt.id})}">View</a>
+                <a th:href="@{/receipt/{id}(id=${receipt.id})}" class="btn btn-primary" >View</a>
             </td>
-            <!--            <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 1, 'COMMA', 2, 'POINT')}"></td>-->
         </tr>
         </tbody>
     </table>

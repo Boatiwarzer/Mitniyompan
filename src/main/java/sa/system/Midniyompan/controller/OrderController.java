@@ -5,14 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sa.system.Midniyompan.common.Status;
+import sa.system.Midniyompan.entity.Receipt;
 import sa.system.Midniyompan.model.AddCartRequest;
 import sa.system.Midniyompan.model.FormRequest;
 import sa.system.Midniyompan.model.OrderRequest;
 import sa.system.Midniyompan.model.ReceiptRequest;
-import sa.system.Midniyompan.service.CustomerService;
-import sa.system.Midniyompan.service.FormPOService;
-import sa.system.Midniyompan.service.OrderService;
-import sa.system.Midniyompan.service.ReceiptService;
+import sa.system.Midniyompan.service.*;
 
 
 import java.util.UUID;
@@ -31,13 +29,23 @@ public class OrderController {
     private CustomerService customerService;
     @Autowired
     private ReceiptService receiptService;
+    @Autowired
+    private ProductService productService;
 
 
     @PostMapping("/{productId}")
     public String order(@PathVariable UUID productId,
-                        @ModelAttribute AddCartRequest request){
-        orderService.order(productId, request);
-        return "redirect:/main";
+                        @ModelAttribute AddCartRequest request,
+                        Model model){
+        if (!productService.isInventoryEnough(productId,request.getQuantity())){
+            orderService.order(productId, request);
+            model.addAttribute("error","ไม่เพียงพอ");
+            return "product-view" + productId;
+        }else {
+            model.addAttribute("success",true);
+            return "redirect:/main";
+        }
+
     }
     @GetMapping
     public String viewCart(Model model) {
@@ -82,11 +90,7 @@ public class OrderController {
         model.addAttribute("order", formPOService.getOneById(orderId));
         return "order-viewFinished";
     }
-    @PostMapping("/order-finished/{request}")
-    public String createReceipt(@PathVariable @ModelAttribute ReceiptRequest request) {
-        receiptService.createReceipt(request);
-        return "redirect:/receipt";
-    }
+    
 
 
     @PostMapping("/order-finished/{orderId}/complete")

@@ -6,4 +6,5 @@ import sa.system.Midniyompan.entity.Receipt;
 import java.util.UUID;
 
 public interface ReceiptRepository extends JpaRepository<Receipt, UUID> {
+
 }

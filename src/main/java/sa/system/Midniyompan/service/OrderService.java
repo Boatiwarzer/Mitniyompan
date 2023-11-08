@@ -54,11 +54,7 @@ public class OrderService {
 
         OrderItem item = new OrderItem();
         item.setId(new OrderItemKey(currentOrderId, productId));
-        if (product.getInventory() <= 0) {
-            currentOrder.setStatus(Status.RESERVE);
-        }else{
-            currentOrder.setStatus(Status.ORDER);
-        }
+
         item.setPurchaseOrder(currentOrder);
         item.setProduct(product);
         item.setQuantity(request.getQuantity());
@@ -123,6 +119,11 @@ public class OrderService {
         PurchaseOrder record = orderRepository.findById(orderId).get();
         record.setStatus(Status.FINISH);
         orderRepository.save(record);
+    }
+    public void completeOrder(UUID orderId) {
+        FormPO record = formPORepository.findById(orderId).get();
+        record.setStatus(Status.Complete);
+        formPORepository.save(record);
     }
 
 

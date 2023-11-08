@@ -30,8 +30,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/png/**")).permitAll()
-
-//                        .requestMatchers(new AntPathRequestMatcher("/staff/**")).hasRole("ROLE_STAFF")
+                        .requestMatchers(new AntPathRequestMatcher("/staff/**")).hasRole("STAFF")
                         .anyRequest().authenticated()
                 ).formLogin((form) -> form
                         .loginPage("/login")

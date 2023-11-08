@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sa.system.Midniyompan.entity.Product;
+import sa.system.Midniyompan.entity.Receipt;
 import sa.system.Midniyompan.model.ProductRequest;
 import sa.system.Midniyompan.model.ReceiptRequest;
 import sa.system.Midniyompan.service.FormPOService;
@@ -31,10 +32,16 @@ public class ReceiptController {
         return "receipt-all";
     }
 
-    @GetMapping("{formPOId}")
-    public String getReceiptForm(@PathVariable UUID formPOId, Model model) {
-        model.addAttribute("receipts", formPOService.getOneById(formPOId) );
+    @GetMapping("/{id}")
+    public String getReceiptForm( @PathVariable UUID id,Model model) {
+        model.addAttribute("receipt", receiptService.getOneById(id) );
         return "receipt-view";
     }
+    @PostMapping
+    public String createReceipt(@ModelAttribute ReceiptRequest formPOId) {
+        receiptService.createReceipt(formPOId);
+        return "redirect:/receipt";
+    }
+
 
 }

@@ -35,6 +35,10 @@ public class ProductService {
     private ModelMapper modelMapper;
     @Autowired
     private CategoryRepository categoryRepository;
+    public boolean isInventoryEnough(UUID id,int quantity){
+        Product product = productRepository.findById(id).get();
+        return product.getInventory() - quantity   >= 0;
+    }
 
     public Product getOneById(UUID id) {
         return productRepository.findById(id).get();

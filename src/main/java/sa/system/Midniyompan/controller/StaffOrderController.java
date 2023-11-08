@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sa.system.Midniyompan.common.Status;
 import sa.system.Midniyompan.service.FormPOService;
 import sa.system.Midniyompan.service.OrderService;
 
@@ -26,7 +27,9 @@ public class StaffOrderController {
 
     @GetMapping
     public String getAllOrders(Model model) {
-        model.addAttribute("orders", formPOService.getAll());
+        Status process = Status.InProcess;
+
+        model.addAttribute("orders", formPOService.getAllStatus(process));
         return "order-all";
     }
     @GetMapping("/{orderId}")

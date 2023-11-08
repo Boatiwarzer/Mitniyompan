@@ -29,10 +29,9 @@
         <a class="button-menu" th:href="@{/main}"><img th:href="@{/main}" th:src="@{/png/product.png}" width="94" height="94" class="pic">สินค้าทั้งหมด</a>
         <a class="button-menu" th:href="@{/orders}"><img th:href="@{/orders}" th:src="@{/png/po.png}" width="94" height="94" class="pic">ตะกร้า</a>
         <a class="button-menu" th:href="@{/orders/order-finished}"><img th:href="@{/orders/order-finished}" th:src="@{/png/listpo.png}" width="94" height="94" class="pic">ออกใบเสร็จ</a>
-        <a class="button-menu" th:href="@{/orders/order-reserve}" ><img th:href="@{/orders/order-reserve}" th:src="@{/png/receipt.png}" width="94" height="94" class="pic">รายการคำสั่งซื้อที่จอง</a>
     </div>
     <div class="menu">
-        <a class="button-menu" th:href="@{/receipt/receipt-all}" ><img th:href="@{/receipt/receipt-all}" th:src="@{/png/listreceipt.png}" width="94" height="94" class="pic">รายการใบเสร้จ</a>
+        <a class="button-menu" th:href="@{/receipt}" ><img th:href="@{/receipt}" th:src="@{/png/listreceipt.png}" width="94" height="94" class="pic">รายการใบเสร้จ</a>
         <a class="button-menu" th:href="@{/signup}"><img th:href="@{/signup}" th:src="@{/png/accountstaff.png}" width="94" height="94" class="pic">สร้างบัญชี Staff</a>
         <a class="button-menu" th:href="@{/customer-all/customer-add}" ><img th:href="@{/customer-all/customer-add}" th:src="@{/png/customer.png}" width="94" height="94" class="pic">เพิ่มรายชื่อลูกค้า</a>
         <a class="button-menu" th:href="@{/customer-all}"><img  th:href="@{/customer-all}" th:src="@{/png/listcustomer.png}" width="94" height="94" class="pic">รายชื่อลูกค้า</a>
@@ -40,9 +39,9 @@
 </div>
 <div sec:authorize="isAuthenticated() and hasRole('ROLE_STAFF')" class="container">
     <div class="menu">
-        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/product.png}" width="94" height="94" class="pic">สินค้าทั้งหมด</a>
-        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/listpo.png}" width="94" height="94" class="pic">รายการคำสั่งซื้อ</a>
-        <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/addproduct.png}" width="94" height="94" class="pic">เพิ่มสินค้า</a>
+        <a class="button-menu" th:href="@{/main}"><img th:href="@{/main}" th:src="@{/png/product.png}" width="94" height="94" class="pic">สินค้าทั้งหมด</a>
+        <a class="button-menu" th:href="@{/staff/orders}"> <img th:href="@{/staff/orders}" th:src="@{/png/listpo.png}" width="94" height="94" class="pic">รายการคำสั่งซื้อ</a>
+        <a class="button-menu" th:href="@{/main/add}"><img th:href="@{/main/add}" th:src="@{/png/addproduct.png}" width="94" height="94" class="pic">เพิ่มสินค้า</a>
         <a class="button-menu"><img th:href="@{/main}" th:src="@{/png/inoutproduct.png}" width="94" height="94" class="pic">ประวัติเพิ่ม/ลด</a>
     </div>
 </div>
