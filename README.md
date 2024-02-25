@@ -1,7 +1,8 @@
 ## แนะนำ Project
-เป็น project ที่จัดการระบบสินค้า ก่อสร้าง ของร้าน Mitniyompan 
+เป็น project ที่จัดการระบบสินค้า ก่อสร้าง ของร้าน Mitniyompan
+JAVA+Spring boot
 ## ขั้นตอนการติดตั้ง Project
 1. ติดตั้ง exampp https://www.apachefriends.org/download.html
 2. เมื่อ รัน exampp ให้ new database ชื่อ mitniyompan
 3. กด import file sql <mitniyompan.sql>
-4. กดรัน MidniyompanApplication หรือ mvn spring-boot:run
+4. กดรัน MidniyompanApplication หรือ รันบน terminal พิมพ์ mvn spring-boot:run
