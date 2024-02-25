@@ -11,6 +11,7 @@ import sa.system.Midniyompan.model.FormRequest;
 import sa.system.Midniyompan.model.OrderRequest;
 import sa.system.Midniyompan.model.ReceiptRequest;
 import sa.system.Midniyompan.service.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.UUID;
@@ -36,13 +37,13 @@ public class OrderController {
     @PostMapping("/{productId}")
     public String order(@PathVariable UUID productId,
                         @ModelAttribute AddCartRequest request,
-                        Model model){
+                        RedirectAttributes model){
         if (!productService.isInventoryEnough(productId,request.getQuantity())){
-            orderService.order(productId, request);
-            model.addAttribute("error","ไม่เพียงพอ");
-            return "product-view" + productId;
+            model.addFlashAttribute("error", "ไม่เพียงพอ");
+            return "redirect:/main/" + productId;
         }else {
-            model.addAttribute("success",true);
+            model.addFlashAttribute("success",true);
+            orderService.order(productId, request);
             return "redirect:/main";
         }
 

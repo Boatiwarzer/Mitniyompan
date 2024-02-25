@@ -42,7 +42,6 @@ public class OrderService {
         currentOrderId = record.getId();
     }
 
-
     public void order(UUID productId, AddCartRequest request) {
         if (currentOrderId == null)
             createNewOrder();
@@ -63,21 +62,6 @@ public class OrderService {
 
         itemRepository.save(item);
     }
-    public void deleteOrder(UUID itemId) {
-        if (currentOrderId == null)
-            return; // ไม่มีออร์เดอร์ที่จะลบ
-
-        PurchaseOrder currentOrder = orderRepository.findById(currentOrderId).get();
-        Product product = productRepository.findById(itemId).get();
-
-        OrderItemKey orderItemKey = new OrderItemKey(currentOrderId, itemId);
-        OrderItem item = itemRepository.findById(orderItemKey).orElse(null);
-
-        if (item != null) {
-            itemRepository.delete(item);
-
-        }
-    }
 
     public PurchaseOrder getCurrentOrder() {
         if (currentOrderId == null)
@@ -85,7 +69,6 @@ public class OrderService {
         return orderRepository.findById(currentOrderId).get();
     }
     public PurchaseOrder getOrder() {
-
         return orderRepository.findById(postId).get();
     }
 

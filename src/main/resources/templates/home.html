@@ -19,9 +19,9 @@
 <!--         th:if="${confirmOrder}">-->
 <!--        Your order has been successfully submitted !-->
 <!--    </div>-->
-    <div id="success-category" class="alert alert-success"
-         th:if="${successCategory}">
-        Your create new Category has been successfully!
+    <div id="success" class="alert alert-success"
+         th:if="${success}">
+        Your add on cart has been successfully!
     </div>
 </div>
 <div sec:authorize="isAuthenticated() and hasRole('ROLE_MANAGER')" class="container">

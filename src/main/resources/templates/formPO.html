@@ -31,11 +31,14 @@
     <form action="#" th:action="@{/orders/FormPO}" th:object="${FormPO}" method="POST">
         <div class="mb-3">
             <label for="inputManagerName">ManagerName</label>
-            <input class="form-control" id="inputManagerName" name="managerName">
+            <input class="form-control" id="inputManagerName" name="managerName" required>
         </div>
         <div class="mb-3">
             <label for="inputPOId">purchaseId</label>
-            <input  th:value="${purchaseOrder.id}" class="form-control" id="inputPOId" th:name="${'purchaseOrderId'}">
+            <input  disabled th:value="${purchaseOrder.id}" class="form-control" id="inputPOId" th:name="${'purchaseOrderId'}">
+        </div>
+        <div class="mb-3">
+            <input type="hidden" th:value="${purchaseOrder.id}" class="form-control" id="inputPOId" th:name="${'purchaseOrderId'}">
         </div>
         <button id="submit-button" type="submit" class="btn btn-primary">Save</button>
     </form>

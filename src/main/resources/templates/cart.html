@@ -35,12 +35,6 @@
             </td>
             <td style="text-align: right" th:text="${#numbers.formatDecimal(item.getSubtotal(), 0, 'COMMA', 2, 'POINT')}"></td>
             <td>
-            <td>
-                <form action="#">
-                    <button id="checkbox${item.product.id}" onclick="removeItem('${item.product.id}')" type="submit">Delete</button>
-                </form>
-
-            </td>
 
 
         </tr>

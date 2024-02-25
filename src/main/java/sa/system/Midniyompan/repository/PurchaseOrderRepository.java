@@ -12,6 +12,5 @@ import java.util.UUID;
 @Repository
 public interface PurchaseOrderRepository
         extends JpaRepository<PurchaseOrder, UUID> {
-    Status findByStatus(Status status);
 }
 
