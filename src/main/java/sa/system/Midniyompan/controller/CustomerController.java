@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import sa.system.Midniyompan.model.AddCartRequest;
 import sa.system.Midniyompan.model.CustomerRequest;
 import sa.system.Midniyompan.repository.CustomerRepository;
@@ -29,9 +31,9 @@ public class CustomerController {
     }
 
     @PostMapping("/customer-add")
-    public String createCustomer(@ModelAttribute CustomerRequest customer,Model model) {
+    public String createCustomer(@ModelAttribute CustomerRequest customer,RedirectAttributes model) {
         customerService.createCustomer(customer);
-        model.addAttribute("customerSuccess",true);
-        return "redirect:customer-all";
+        model.addFlashAttribute("customerSuccess",true);
+        return "redirect:/customer-all";
     }
 }

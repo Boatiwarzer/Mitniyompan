@@ -21,15 +21,15 @@
       </div>
       <div class="input-container">
         <label for="fullname">Full Name</label>
-        <input type="input" id="fullname" name="name" placeholder="Full Name">
+        <input type="input" id="fullname" name="name" placeholder="Full Name" required>
       </div>
       <div class="input-container">
         <label for="address">Address</label>
-        <input type="input" id="address" name="address" placeholder="Street Name, Building, House No.">
+        <textarea id="address" name="address" placeholder="Street Name, Building, House No." required></textarea>
       </div>
       <div class="input-container">
         <label for="phone">Phone</label>
-        <input type="input" id="phone" name="phone" placeholder="Phone">
+        <input type="input" id="phone" name="phone" placeholder="000-000-0000"  pattern="\d{3}-\d{3}-\d{4}" required>
       </div>
       <div class="button-container">
         <button id="submit-button" class="confirm-button" type="submit">Confirm</button>
