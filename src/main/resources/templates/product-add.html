@@ -41,7 +41,7 @@
     <div class="mb-3">
       <label for="inputRemain">Remaining</label>
       <input id="inputRemain" type="number" class="form-control"
-             name="remain" required>
+             name="remain" th:min="1" th:value="1"required>
     </div>
     <div class="mb-3">
       <label for="inputWareHouse">Warehouse</label>
@@ -51,7 +51,7 @@
     <div class="mb-3">
       <label for="inputPrice">Price</label>
       <input id="inputPrice" type="number" class="form-control"
-             name="price" required>
+             name="price" th:min="1" th:value="1" required>
     </div>
     <div class="mb-3">
       <label for="inputDetail">Detail</label>
