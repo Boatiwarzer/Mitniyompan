@@ -71,7 +71,7 @@
             <div class="col-xl-2" ><p class="text-detail">คลังสินค้า</p> </div>
             <div class="col-xl-3">
 <!--              <label for="inputWareHouse">Warehouse</label>-->
-              <input th:value="${product.wareHouse}" id="inputWareHouse" type="input" class="form-control"
+              <input th:value="${product.wareHouse}" id="inputWareHouse" type="number" class="form-control"
                      name="warehouse" required>
 
             </div>
@@ -87,7 +87,7 @@
             <div class="col-xl-2" ><p class="text-detail" >จำนวนคงคลัง</p> </div>
             <div class="col-xl-3">
               <!--              <label for="inputRemain">Remaining</label>-->
-              <input th:value="${product.inventory}" id="inputRemain" type="input" class="form-control"
+              <input th:value="${product.inventory}" id="inputRemain" type="number" class="form-control"
                      name="remain" required>
             </div>
             <div class="col-xl-3"> <p class="text-detail">รายละเอียด</p></div>
