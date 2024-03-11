@@ -65,14 +65,13 @@ public class OrderController {
     @PostMapping
     public String submitOrder(@ModelAttribute OrderRequest request, Model model) {
         orderService.submitOrder(request);
-        model.addAttribute("confirmOrder", true);
         return "redirect:/orders/FormPO";
 
     }
     @PostMapping("/FormPO")
-    public String submitFormPO(@ModelAttribute FormRequest request, Model model) {
+    public String submitFormPO(@ModelAttribute FormRequest request, RedirectAttributes model) {
         formPOService.createForm(request);
-        model.addAttribute("confirmOrder", true);
+        model.addFlashAttribute("confirmOrder", true);
         return "redirect:/main";
     }
     @GetMapping("/order-finished")

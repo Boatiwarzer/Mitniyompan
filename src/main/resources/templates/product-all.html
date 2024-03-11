@@ -15,7 +15,11 @@
 <h1>รายการสินค้า</h1>
 <div id="success" class="alert alert-success"
      th:if="${success}">
-    สินค้าอยู่บนตะกร้าแล้ว
+    บันทึกใบสั่งซื้อ
+</div>
+<div id="successOrder" class="alert alert-success"
+     th:if="${confirmOrder}">
+    สั่งซื้อสำเร็จ!
 </div>
 <div id="error" class="alert alert-danger"
      th:if="${error}" th:text="${error}">
